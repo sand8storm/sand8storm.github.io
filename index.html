@@ -1,22 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Michel Aljed</title>
+  <!-- Security headers deliverable via meta (see notes for server-side ones) -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests"/>
+  <meta name="referrer" content="strict-origin-when-cross-origin"/>
+  <meta name="robots" content="index, follow, max-image-preview:large"/>
+  <link rel="canonical" href="https://cybort.me/"/>
+
+  <title>Michel Aljed — Penetration Testing, AI & Technical Tutoring | Damascus</title>
+  <meta name="description" content="Authorized penetration testing, security assessments, OSINT and bug bounty, plus applied machine-learning research and technical tutoring. Based in Damascus, Syria."/>
+  <meta name="keywords" content="penetration testing, security assessment, bug bounty, OSINT, web application security, machine learning, AI research, technical tutoring, cybersecurity Damascus, Syrian security researcher"/>
+
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="Michel Aljed"/>
+  <meta property="og:title" content="Michel Aljed — Penetration Testing, AI & Technical Tutoring"/>
+  <meta property="og:description" content="Authorized security assessments, applied ML/research, and clear technical tutoring. Damascus, Syria."/>
+  <meta property="og:url" content="https://cybort.me/"/>
+  <meta property="og:image" content="https://cybort.me/og-image.png"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:locale:alternate" content="ar_AR"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Michel Aljed — Penetration Testing, AI & Technical Tutoring"/>
+  <meta name="twitter:description" content="Authorized security assessments, applied ML/research, and technical tutoring. Damascus, Syria."/>
+  <meta name="twitter:image" content="https://cybort.me/og-image.png"/>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230f1012'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='18' fill='%23d3ad5a' text-anchor='middle'%3E&gt;_%3C/text%3E%3C/svg%3E"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@300;400;500;700&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg:      #111113;
-      --surface: #17171b;
-      --border:  #232328;
-      --accent:  #c8a84b;
-      --text:    #dcdce6;
-      --muted:   #64647a;
+      --bg:      #0f1012;
+      --bg-2:    #0a0b0d;
+      --surface: #16171b;
+      --surface2:#1b1c22;
+      --border:  #26272e;
+      --border-2:#34353f;
+      --accent:  #d3ad5a;
+      --accent-2:#e6cd8e;
+      --accent-soft: rgba(211,173,90,0.12);
+      --text:    #ecebf1;
+      --muted:   #9a9bac;
+      --ok:      #6fcf97;
       --mono: 'IBM Plex Mono', monospace;
       --sans: 'DM Sans', sans-serif;
-      --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --space-section: clamp(4.5rem, 9vw, 7rem);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -25,621 +55,533 @@
       background: var(--bg);
       color: var(--text);
       font-family: var(--sans);
-      font-weight: 300;
-      line-height: 1.6;
+      font-weight: 400;
+      line-height: 1.65;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    body[dir="rtl"] { font-family: 'IBM Plex Sans Arabic', var(--sans); }
+    a { color: inherit; }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border-2); }
+
+    /* SCROLL PROGRESS */
+    #progress {
+      position: fixed; top: 0; inset-inline-start: 0; z-index: 200;
+      height: 2px; width: 0;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 10px rgba(211,173,90,0.5);
+      transition: width 0.1s linear;
     }
 
-    ::-webkit-scrollbar { width: 3px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: var(--border); }
-
+    /* NAV */
     nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      position: fixed; top: 0; inset-inline: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 1.25rem 4rem;
-      background: rgba(17,17,19,0.92);
-      backdrop-filter: blur(20px);
+      padding: 1.05rem 2.5rem;
+      background: rgba(15,16,18,0.78);
+      backdrop-filter: blur(22px) saturate(140%);
       border-bottom: 1px solid var(--border);
     }
-    .nav-logo { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); letter-spacing: 0.08em; }
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-logo { font-family: var(--mono); font-size: 0.8rem; color: var(--accent); letter-spacing: 0.06em; text-decoration: none; }
+    .nav-right { display: flex; align-items: center; gap: 1.8rem; }
+    .nav-links { display: flex; gap: 1.9rem; list-style: none; }
     .nav-links a {
-      font-family: var(--mono); font-size: 0.68rem;
-      color: var(--muted); text-decoration: none;
-      letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--accent); }
-
-    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 3rem; }
-
-    .section { padding: 6rem 0; border-top: 1px solid var(--border); }
-    .sec-header { margin-bottom: 3.5rem; }
-    .sec-label {
       font-family: var(--mono); font-size: 0.66rem;
-      color: var(--accent); letter-spacing: 0.22em;
-      text-transform: uppercase; margin-bottom: 0.5rem;
+      color: var(--muted); text-decoration: none; position: relative;
+      letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.25s;
     }
-    .sec-title {
-      font-size: clamp(1.6rem, 3vw, 2.4rem);
-      font-weight: 700; letter-spacing: -0.025em; line-height: 1.1;
+    .nav-links a::after {
+      content: ""; position: absolute; bottom: -5px; inset-inline-start: 0;
+      width: 0; height: 1px; background: var(--accent); transition: width 0.3s var(--ease);
     }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+    .nav-links a.active::after { width: 100%; }
+    .lang-btn, .menu-btn {
+      font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.1em;
+      background: transparent; border: 1px solid var(--border-2); color: var(--muted);
+      padding: 0.42rem 0.72rem; border-radius: 5px; cursor: pointer; transition: all 0.25s;
+    }
+    .lang-btn:hover, .menu-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .menu-btn { display: none; }
+
+    .wrap { max-width: 1060px; margin: 0 auto; padding-inline: 2.5rem; }
+
+    /* equal, rhythmic section spacing */
+    .wrap > section { padding-block: var(--space-section); border-top: 1px solid var(--border); }
+    .sec-header { margin-bottom: 3.25rem; }
+    .sec-label { font-family: var(--mono); font-size: 0.64rem; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.7rem; }
+    .sec-title { font-size: clamp(1.65rem, 3vw, 2.35rem); font-weight: 700; letter-spacing: -0.025em; line-height: 1.12; }
+    .sec-intro { color: var(--muted); max-width: 560px; margin-top: 1rem; font-size: 0.95rem; }
 
     /* HERO */
     #hero {
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 320px;
-      align-items: center;
-      gap: 4rem;
-      padding: 5rem 0 4rem;
+      position: relative; min-height: 100vh; display: grid;
+      grid-template-columns: 1fr 330px; align-items: center; gap: 4rem;
+      padding-block: 7rem 4.5rem; border-top: none;
     }
-    .hero-eyebrow {
-      font-family: var(--mono); font-size: 0.7rem;
-      color: var(--accent); letter-spacing: 0.2em;
-      text-transform: uppercase; margin-bottom: 2rem;
-      opacity: 0; animation: up 0.5s 0.1s forwards;
+    #hero::before {
+      content: ""; position: absolute; z-index: -1;
+      width: 620px; height: 620px; inset-inline-start: -120px; top: 4%;
+      background: radial-gradient(circle, rgba(211,173,90,0.13), transparent 62%);
+      filter: blur(20px); pointer-events: none;
+      animation: drift 16s ease-in-out infinite alternate;
     }
-    .hero-name {
-      font-size: clamp(3.5rem, 6.5vw, 6rem);
-      font-weight: 700; line-height: 0.93;
-      letter-spacing: -0.035em; margin-bottom: 2rem;
-      opacity: 0; animation: up 0.6s 0.25s forwards;
+    @keyframes drift {
+      from { transform: translate(0,0) scale(1); opacity: 0.85; }
+      to   { transform: translate(70px,40px) scale(1.12); opacity: 1; }
     }
-    .hero-name em { display: block; font-style: normal; font-weight: 300; color: var(--muted); }
-    .hero-summary {
-      font-size: 1rem; color: var(--muted);
-      line-height: 1.85; max-width: 480px; margin-bottom: 2.5rem;
-      opacity: 0; animation: up 0.6s 0.4s forwards;
-    }
-    .hero-summary strong { color: var(--text); font-weight: 500; }
-    .hero-cta { opacity: 0; animation: up 0.6s 0.55s forwards; }
-    .btn {
-      font-family: var(--mono); font-size: 0.7rem;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      padding: 0.8rem 1.8rem; text-decoration: none;
-      border-radius: 1px; transition: all 0.2s;
-      display: inline-flex; align-items: center; gap: 0.5rem;
-    }
-    .btn-primary { background: var(--accent); color: #111; border: 1px solid var(--accent); }
-    .btn-primary:hover { background: transparent; color: var(--accent); }
+    .status { display: inline-flex; align-items: center; gap: 0.55rem; font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--border-2); border-radius: 100px; padding: 0.38rem 0.85rem; margin-bottom: 1.6rem; opacity: 0; animation: up 0.5s 0.05s forwards; }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 0 rgba(111,207,151,0.6); animation: pulse 2.4s infinite; }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(111,207,151,0.55); } 70% { box-shadow: 0 0 0 7px rgba(111,207,151,0); } 100% { box-shadow: 0 0 0 0 rgba(111,207,151,0); } }
+    .hero-eyebrow { font-family: var(--mono); font-size: 0.7rem; color: var(--accent); letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 1.5rem; opacity: 0; animation: up 0.55s 0.16s forwards; }
+    .hero-name { font-size: clamp(3.3rem, 6.8vw, 5.8rem); font-weight: 700; line-height: 0.94; letter-spacing: -0.038em; margin-bottom: 1.7rem; opacity: 0; animation: up 0.6s 0.28s forwards; }
+    .hero-name em { display: block; font-style: normal; font-weight: 400; background: linear-gradient(90deg, var(--muted), #6a6b7e); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero-summary { font-size: 1.02rem; color: var(--muted); line-height: 1.85; max-width: 510px; margin-bottom: 2.4rem; opacity: 0; animation: up 0.6s 0.42s forwards; }
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; opacity: 0; animation: up 0.6s 0.56s forwards; }
+    .btn { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.9rem 1.75rem; text-decoration: none; border-radius: 3px; transition: all 0.28s var(--ease); display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; }
+    .btn-primary { background: var(--accent); color: #14140f; border: 1px solid var(--accent); box-shadow: 0 6px 22px rgba(211,173,90,0.18); }
+    .btn-primary:hover { background: var(--accent-2); border-color: var(--accent-2); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(211,173,90,0.28); }
+    .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border-2); }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
 
-    .hero-card {
-      background: var(--surface); border: 1px solid var(--border); padding: 2rem;
-      opacity: 0; animation: up 0.6s 0.6s forwards;
-    }
-    .hero-card-row {
-      display: flex; justify-content: space-between; align-items: baseline;
-      padding: 0.85rem 0; border-bottom: 1px solid var(--border); font-size: 0.855rem;
-    }
-    .hero-card-row:last-child { border-bottom: none; }
-    .hcr-key { font-family: var(--mono); font-size: 0.64rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
-    .hcr-val { color: var(--text); font-weight: 400; text-align: right; }
+    .hero-card { background: linear-gradient(160deg, var(--surface), var(--bg-2)); border: 1px solid var(--border); border-radius: 14px; padding: 1.9rem; box-shadow: 0 24px 60px rgba(0,0,0,0.4); opacity: 0; animation: up 0.6s 0.62s forwards; }
+    .hcr { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: 0.82rem 0; border-bottom: 1px solid var(--border); font-size: 0.85rem; }
+    .hcr:last-child { border-bottom: none; }
+    .hcr-key { font-family: var(--mono); font-size: 0.62rem; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
+    .hcr-val { color: var(--text); text-align: end; }
     .hcr-accent { color: var(--accent); }
-    .hcr-highlight { 
-      color: var(--accent); 
-      font-weight: 500;
-      background: rgba(200, 168, 75, 0.08);
-      padding: 0.15rem 0.5rem;
-      border-radius: 2px;
-    }
 
-    /* SKILLS - IMPROVED GRID LAYOUT */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.25rem;
-    }
+    /* WORK */
+    .work-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 1.3rem; }
+    .work-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 1.95rem; display: flex; flex-direction: column; transition: transform 0.4s var(--ease), border-color 0.4s var(--ease), box-shadow 0.4s var(--ease), background 0.4s var(--ease); }
+    .work-card:hover { border-color: var(--border-2); transform: translateY(-5px); background: var(--surface2); box-shadow: 0 20px 50px rgba(0,0,0,0.35); }
+    .work-tag { font-family: var(--mono); font-size: 0.6rem; color: var(--accent); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 1rem; }
+    .work-name { font-size: 1.1rem; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 0.85rem; }
+    .work-desc { color: var(--muted); font-size: 0.88rem; line-height: 1.75; margin-bottom: 1.15rem; }
+    .work-for { font-size: 0.8rem; color: var(--text); padding-block: 0.95rem; border-top: 1px solid var(--border); margin-top: auto; }
+    .work-for b { color: var(--accent); font-weight: 500; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; display: block; margin-bottom: 0.4rem; }
+    .work-link { font-family: var(--mono); font-size: 0.66rem; color: var(--accent); letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; margin-top: 1.05rem; transition: gap 0.25s var(--ease), color 0.25s; display: inline-flex; gap: 0.4rem; }
+    .work-link:hover { gap: 0.75rem; color: var(--accent-2); }
 
-    .skill-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 1.75rem;
-      transition: all 0.35s var(--ease-out-quart);
-    }
+    /* PROOF */
+    .proof-item { display: grid; grid-template-columns: 150px 1fr; gap: 2.5rem; padding-block: 2.1rem; border-bottom: 1px solid var(--border); transition: background 0.3s; }
+    .proof-item:first-child { border-top: 1px solid var(--border); }
+    .proof-kind { font-family: var(--mono); font-size: 0.64rem; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; padding-top: 0.3rem; }
+    .proof-title { font-size: 1.02rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 0.65rem; }
+    .proof-desc { color: var(--muted); font-size: 0.875rem; line-height: 1.8; margin-bottom: 0.95rem; }
+    .proof-takeaway { font-size: 0.82rem; color: var(--text); }
+    .proof-takeaway b { font-family: var(--mono); font-size: 0.6rem; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; margin-inline-end: 0.55rem; }
 
-    .skill-card:hover {
-      border-color: #2a2a35;
-      transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.12);
-      background: #1a1a1f;
-    }
+    /* SKILLS */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.3rem; }
+    .skill-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 1.8rem; transition: transform 0.35s var(--ease), border-color 0.35s var(--ease); }
+    .skill-card:hover { border-color: var(--border-2); transform: translateY(-3px); }
+    .skill-title { font-family: var(--mono); font-size: 0.68rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1.15rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.42rem; }
+    .tag { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.03em; padding: 0.27rem 0.58rem; border: 1px solid var(--border-2); color: var(--muted); border-radius: 5px; transition: all 0.2s; }
+    .tag:hover { border-color: var(--accent); color: var(--accent); }
 
-    .skill-card-title {
-      font-size: 0.82rem; font-weight: 500; color: var(--text);
-      margin-bottom: 1.25rem; padding-bottom: 0.75rem;
-      border-bottom: 1px solid var(--border); letter-spacing: 0.01em;
-      font-family: var(--mono);
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-size: 0.72rem;
-    }
-
-    .tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
-    .tag {
-      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.04em;
-      padding: 0.22rem 0.5rem; border: 1px solid var(--border);
-      color: var(--muted); border-radius: 4px; transition: all 0.15s;
-    }
-    .tag:hover { border-color: rgba(200,168,75,0.4); color: var(--accent); }
-
-    /* EXPERIENCE */
-    .exp-item {
-      display: grid; grid-template-columns: 180px 1fr;
-      gap: 3rem; padding: 2.25rem 0; border-bottom: 1px solid var(--border);
-    }
+    /* BACKGROUND */
+    .exp-item { display: grid; grid-template-columns: 170px 1fr; gap: 2.5rem; padding-block: 2rem; border-bottom: 1px solid var(--border); }
     .exp-item:first-child { border-top: 1px solid var(--border); }
-    .exp-period { font-family: var(--mono); font-size: 0.66rem; color: var(--muted); letter-spacing: 0.04em; padding-top: 0.2rem; }
-    .exp-role { font-size: 0.95rem; font-weight: 500; margin-bottom: 0.2rem; letter-spacing: -0.01em; }
-    .exp-org { font-family: var(--mono); font-size: 0.68rem; color: var(--accent); letter-spacing: 0.04em; margin-bottom: 0.8rem; }
-    .exp-desc { color: var(--muted); font-size: 0.865rem; line-height: 1.8; }
-
-    /* PROJECTS */
-    .projects-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-      gap: 1.25rem;
-    }
-
-    .project-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 2rem; display: flex; flex-direction: column; gap: 0.8rem;
-      transition: all 0.35s var(--ease-out-quart);
-    }
-
-    .project-card:hover {
-      border-color: #2a2a35;
-      transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.12);
-      background: #1a1a1f;
-    }
-
-    .project-index { font-family: var(--mono); font-size: 0.6rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
-    .project-title { font-size: 0.95rem; font-weight: 500; letter-spacing: -0.01em; }
-    .project-desc { color: var(--muted); font-size: 0.845rem; line-height: 1.78; flex: 1; }
-
-    /* CERTIFICATIONS */
-    .cert-item {
-      display: grid; grid-template-columns: 1fr auto;
-      gap: 2rem; align-items: baseline;
-      padding: 1rem 0; border-bottom: 1px solid var(--border); font-size: 0.875rem;
-    }
-    .cert-item:first-child { border-top: 1px solid var(--border); }
-    .cert-name { font-weight: 400; color: var(--text); }
-    .cert-issuer { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); letter-spacing: 0.04em; white-space: nowrap; }
+    .exp-period { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); letter-spacing: 0.03em; padding-top: 0.18rem; }
+    .exp-role { font-size: 0.96rem; font-weight: 500; margin-bottom: 0.22rem; }
+    .exp-org { font-family: var(--mono); font-size: 0.66rem; color: var(--accent); margin-bottom: 0.72rem; }
+    .exp-desc { color: var(--muted); font-size: 0.86rem; line-height: 1.78; }
 
     /* CONTACT */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .contact-lead { color: var(--muted); font-size: 0.98rem; line-height: 1.9; margin-bottom: 2.2rem; }
     .contact-links { display: flex; flex-direction: column; }
-    .contact-link {
-      display: grid; grid-template-columns: 90px 1fr;
-      gap: 1rem; align-items: center;
-      padding: 0.85rem 0; border-bottom: 1px solid var(--border);
-      text-decoration: none; transition: all 0.18s;
-    }
+    .contact-link { display: grid; grid-template-columns: 95px 1fr; gap: 1rem; align-items: center; padding: 0.85rem 0; border-bottom: 1px solid var(--border); text-decoration: none; transition: padding-inline-start 0.25s var(--ease); }
     .contact-link:first-child { border-top: 1px solid var(--border); }
-    .contact-link-label { font-family: var(--mono); font-size: 0.62rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
-    .contact-link-val { font-size: 0.855rem; color: var(--text); transition: color 0.18s; }
-    .contact-link:hover .contact-link-val { color: var(--accent); }
+    .contact-link:hover { padding-inline-start: 0.5rem; }
+    .cl-label { font-family: var(--mono); font-size: 0.61rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+    .cl-val { font-size: 0.85rem; color: var(--text); transition: color 0.18s; }
+    .contact-link:hover .cl-val { color: var(--accent); }
+    .contact-note { padding: 1.7rem; background: linear-gradient(160deg, var(--surface), var(--bg-2)); border: 1px solid var(--border); border-radius: 16px; }
+    .contact-note .cn-head { font-family: var(--mono); font-size: 0.62rem; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1rem; }
+    .contact-note ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+    .contact-note li { font-size: 0.85rem; color: var(--muted); padding-inline-start: 1.1rem; position: relative; }
+    .contact-note li::before { content: "→"; position: absolute; inset-inline-start: 0; color: var(--accent); }
+    body[dir="rtl"] .contact-note li::before { content: "←"; }
 
-    .contact-note {
-      margin-top: 3rem; padding: 1.75rem;
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 14px;
-    }
-    .contact-note p { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); line-height: 1.9; }
-    .contact-note span { color: var(--accent); }
+    footer { padding: 2rem 2.5rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+    .footer-name { font-family: var(--mono); font-size: 0.64rem; color: var(--muted); letter-spacing: 0.08em; }
+    .footer-quote { font-family: var(--mono); font-size: 0.62rem; color: var(--border-2); letter-spacing: 0.05em; font-style: italic; }
 
-    footer {
-      padding: 2rem 3rem; border-top: 1px solid var(--border);
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    .footer-name { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); letter-spacing: 0.1em; }
-    .footer-quote { font-family: var(--mono); font-size: 0.62rem; color: var(--border); letter-spacing: 0.06em; font-style: italic; }
-
-    @keyframes up {
-      from { opacity: 0; transform: translateY(14px); }
-      to   { opacity: 1; transform: none; }
-    }
-    .fade { opacity: 0; transform: translateY(14px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    @keyframes up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+    .fade { opacity: 0; transform: translateY(22px); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
     .fade.on { opacity: 1; transform: none; }
+    .work-grid .fade:nth-child(2), .skills-grid .fade:nth-child(2) { transition-delay: 0.09s; }
+    .work-grid .fade:nth-child(3), .skills-grid .fade:nth-child(3) { transition-delay: 0.18s; }
 
     @media (max-width: 860px) {
-      nav { padding: 1rem 1.5rem; }
-      .nav-links { display: none; }
-      .wrap { padding: 0 1.5rem; }
-      #hero { grid-template-columns: 1fr; padding-top: 6rem; }
-      .hero-card { display: none; }
-      .skills-grid { grid-template-columns: 1fr; }
-      .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
-      .projects-grid { grid-template-columns: 1fr; }
-      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+      nav { padding: 0.85rem 1.3rem; }
+      .nav-links { display: none; position: absolute; top: 100%; inset-inline: 0; flex-direction: column; gap: 0; background: var(--bg); border-bottom: 1px solid var(--border); padding: 0.5rem 1.3rem 1rem; }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 0.75rem 0; }
+      .nav-links a::after { display: none; }
+      .menu-btn { display: inline-block; }
+      .wrap { padding-inline: 1.3rem; }
+      #hero { grid-template-columns: 1fr; padding-top: 6rem; gap: 2.5rem; }
+      #hero::before { width: 380px; height: 380px; }
+      .proof-item, .exp-item { grid-template-columns: 1fr; gap: 0.65rem; }
+      .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      footer { flex-direction: column; text-align: center; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .fade { opacity: 1; transform: none; }
+      [class*="hero-"], .status { opacity: 1 !important; }
+      #hero::before { display: none; }
     }
   </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Michel Aljed",
+    "url": "https://cybort.me/",
+    "jobTitle": "Security Researcher",
+    "description": "Security researcher, applied AI/ML practitioner, and technical tutor offering authorized penetration testing, security assessments, OSINT, machine-learning research, and technical teaching.",
+    "knowsLanguage": ["ar", "en"],
+    "knowsAbout": ["Penetration Testing", "Web Application Security", "Vulnerability Assessment", "OSINT", "Bug Bounty", "Machine Learning", "Neural Networks", "Number Theory", "Python", "C++"],
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "Antioch Private Syrian University"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Damascus",
+      "addressCountry": "SY"
+    },
+    "sameAs": [
+      "https://github.com/sand8storm",
+      "https://hackerone.com/sand666wind",
+      "https://app.intigriti.com/profile/sand666wind",
+      "https://bugcrowd.com/sand666wind",
+      "https://instagram.com/cyborg.div"
+    ],
+    "makesOffer": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Security Assessments & Bug Bounty",
+          "serviceType": "Penetration Testing",
+          "description": "Authorized web-application security testing, vulnerability assessment, and OSINT exposure reviews, delivered as clear, actionable reports.",
+          "areaServed": "Worldwide"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Machine Learning & Research",
+          "serviceType": "Machine Learning Research",
+          "description": "Building and analyzing ML models, data analysis, and applied research."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Technical Teaching & Content",
+          "serviceType": "Technical Tutoring",
+          "description": "Clear, analogy-first teaching of programming, mathematics, and security concepts, one-to-one or as Arabic-language content."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
-<body>
+<body dir="ltr">
+
+  <div id="progress"></div>
 
   <nav>
-    <div class="nav-logo">Michel Aljed</div>
-    <ul class="nav-links">
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#certifications">Certifications</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
+    <a href="#hero" class="nav-logo">Michel Aljed</a>
+    <div class="nav-right">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#work" data-en="Work" data-ar="العمل">Work</a></li>
+        <li><a href="#proof" data-en="Proof" data-ar="الإثبات">Proof</a></li>
+        <li><a href="#skills" data-en="Skills" data-ar="المهارات">Skills</a></li>
+        <li><a href="#background" data-en="Background" data-ar="الخلفية">Background</a></li>
+        <li><a href="#contact" data-en="Contact" data-ar="تواصل">Contact</a></li>
+      </ul>
+      <button class="lang-btn" id="langBtn" aria-label="Switch language">العربية</button>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">≡</button>
+    </div>
   </nav>
 
-  <!-- HERO -->
-  <div class="wrap">
-    <div id="hero">
-      <div class="hero-left">
-        <p class="hero-eyebrow">Cybersecurity · Software Engineering · AI Research</p>
-        <h1 class="hero-name">Michel<em>Aljed</em></h1>
-        <p class="hero-summary">
-          Final-year IT Engineering student specializing in <strong>Cybersecurity</strong> and <strong>Artificial Intelligence</strong>.
-          My work focuses on web application security, security research, and software engineering,
-          with additional interests in machine learning, symbolic AI, and mathematical research.
-        </p>
-        <div class="hero-cta">
-          <a href="#contact" class="btn btn-primary">Get in touch →</a>
-        </div>
-      </div>
-      <div class="hero-card">
-        <div class="hero-card-row">
-          <span class="hcr-key">Degree</span>
-          <span class="hcr-val">B.Sc. IT Engineering</span>
-        </div>
-        <div class="hero-card-row">
-          <span class="hcr-key">University</span>
-          <span class="hcr-val">Antioch Private Syrian Univ.</span>
-        </div>
-        <div class="hero-card-row">
-          <span class="hcr-key">Specialization</span>
-          <span class="hcr-val hcr-accent">AI & Cybersecurity</span>
-        </div>
-        <div class="hero-card-row">
-          <span class="hcr-key">TryHackMe</span>
-          <span class="hcr-val hcr-highlight">Top 10 Syria (1 Month)</span>
-        </div>
-        <div class="hero-card-row">
-          <span class="hcr-key">Status</span>
-          <span class="hcr-val">Final Year · 2025–2026</span>
-        </div>
-        <div class="hero-card-row">
-          <span class="hcr-key">Location</span>
-          <span class="hcr-val">Damascus, Syria</span>
-        </div>
-        <div class="hero-card-row">
-          <span class="hcr-key">Arabic</span>
-          <span class="hcr-val">Native</span>
-        </div>
-        <div class="hero-card-row">
-          <span class="hcr-key">English</span>
-          <span class="hcr-val">C1 Proficiency</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- SKILLS -->
-  <div class="wrap">
-    <div class="section" id="skills">
-      <div class="sec-header">
-        <p class="sec-label fade">Expertise</p>
-        <h2 class="sec-title fade">Skills & Technologies</h2>
-      </div>
-      <div class="skills-grid">
-
-        <div class="skill-card fade">
-          <div class="skill-card-title">Cybersecurity</div>
-          <div class="tags">
-            <span class="tag">Web Penetration Testing</span>
-            <span class="tag">Vulnerability Assessment</span>
-            <span class="tag">OSINT Investigations</span>
-            <span class="tag">Bug Bounty Methodology</span>
-            <span class="tag">CTF Challenges</span>
-            <span class="tag">Security Reporting</span>
-            <span class="tag">Applied Cryptography</span>
-            <span class="tag">Linux Security</span>
-            <span class="tag">Digital Forensics</span>
-          </div>
-        </div>
-
-        <div class="skill-card fade">
-          <div class="skill-card-title">Software Engineering</div>
-          <div class="tags">
-            <span class="tag">C++</span>
-            <span class="tag">Python</span>
-            <span class="tag">JavaScript</span>
-            <span class="tag">Bash</span>
-            <span class="tag">SQL</span>
-            <span class="tag">Object-Oriented Programming</span>
-            <span class="tag">Data Structures & Algorithms</span>
-            <span class="tag">SOLID Principles</span>
-            <span class="tag">Design Patterns</span>
-            <span class="tag">Clean Architecture</span>
-          </div>
-        </div>
-
-        <div class="skill-card fade">
-          <div class="skill-card-title">Artificial Intelligence</div>
-          <div class="tags">
-            <span class="tag">Machine Learning</span>
-            <span class="tag">Neural Networks</span>
-            <span class="tag">Symbolic AI</span>
-            <span class="tag">Data Analysis</span>
-            <span class="tag">NumPy · Pandas</span>
-            <span class="tag">scikit-learn</span>
-            <span class="tag">Prolog</span>
-            <span class="tag">MATLAB</span>
-          </div>
-        </div>
-
-        <div class="skill-card fade">
-          <div class="skill-card-title">Mathematics</div>
-          <div class="tags">
-            <span class="tag">Discrete Mathematics</span>
-            <span class="tag">Probability & Statistics</span>
-            <span class="tag">Numerical Analysis</span>
-            <span class="tag">Linear Algebra</span>
-            <span class="tag">Analytic Number Theory</span>
-            <span class="tag">Operations Research</span>
-          </div>
-        </div>
-
-        <div class="skill-card fade">
-          <div class="skill-card-title">Research & Analysis</div>
-          <div class="tags">
-            <span class="tag">Technical Research</span>
-            <span class="tag">Mathematical Modeling</span>
-            <span class="tag">Formal Reasoning</span>
-            <span class="tag">Academic Writing</span>
-            <span class="tag">Technical Documentation</span>
-          </div>
-        </div>
-
-        <div class="skill-card fade">
-          <div class="skill-card-title">Teaching & Communication</div>
-          <div class="tags">
-            <span class="tag">Mathematics Instruction</span>
-            <span class="tag">Programming Education</span>
-            <span class="tag">Technical Content Creation</span>
-            <span class="tag">Conceptual Explanation</span>
-            <span class="tag">Structured Problem-Solving</span>
-          </div>
-        </div>
-
-        <div class="skill-card fade">
-          <div class="skill-card-title">Tools & Environments</div>
-          <div class="tags">
-            <span class="tag">VS Code</span>
-            <span class="tag">PyCharm</span>
-            <span class="tag">IntelliJ IDEA</span>
-            <span class="tag">Jupyter</span>
-            <span class="tag">Git</span>
-            <span class="tag">Obsidian</span>
-            <span class="tag">Linux</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <!-- EXPERIENCE -->
-  <div class="wrap">
-    <div class="section" id="experience">
-      <div class="sec-header">
-        <p class="sec-label fade">Background</p>
-        <h2 class="sec-title fade">Experience</h2>
-      </div>
-
-      <div class="exp-item fade">
-        <div class="exp-period">2022 — Present</div>
+  <main>
+    <div class="wrap">
+      <section id="hero">
         <div>
-          <div class="exp-role">B.Sc. Information Technology Engineering</div>
-          <div class="exp-org">Antioch Private Syrian University · AI & Cybersecurity</div>
-          <div class="exp-desc">
-            Final-year student specializing in Artificial Intelligence and Cybersecurity.
-            Core curriculum includes Advanced Software Engineering, Machine Learning,
-            Neural Networks, Discrete Mathematics, and Compiler Design.
+          <span class="status"><span class="dot"></span><span data-en="Available for new projects" data-ar="متاح لمشاريع جديدة">Available for new projects</span></span>
+          <p class="hero-eyebrow" data-en="Security research · Applied AI · Technical teaching" data-ar="أبحاث أمنية · ذكاء اصطناعي تطبيقي · تدريس تقني">Security research · Applied AI · Technical teaching</p>
+          <h1 class="hero-name">Michel<em>Aljed</em></h1>
+          <p class="hero-summary" data-en="I work with teams and individuals on three things: finding security flaws before attackers do, building and analyzing machine-learning systems, and teaching hard technical topics clearly. Authorized assessments, honest reporting, real depth." data-ar="أعمل مع الفرق والأفراد على ثلاثة أشياء: كشف الثغرات الأمنية قبل المهاجمين، بناء وتحليل أنظمة التعلّم الآلي، وتدريس المواضيع التقنية الصعبة بوضوح. تقييمات مُصرَّح بها، تقارير صادقة، وعُمق حقيقي.">I work with teams and individuals on three things: finding security flaws before attackers do, building and analyzing machine-learning systems, and teaching hard technical topics clearly. Authorized assessments, honest reporting, real depth.</p>
+          <div class="hero-cta">
+            <a href="#work" class="btn btn-primary" data-en="See how I can help →" data-ar="كيف يمكنني المساعدة ←">See how I can help →</a>
+            <a href="#proof" class="btn btn-ghost" data-en="View my work" data-ar="شاهد أعمالي">View my work</a>
           </div>
         </div>
-      </div>
-
-      <div class="exp-item fade">
-        <div class="exp-period">2024 — Present</div>
-        <div>
-          <div class="exp-role">Independent Security Researcher</div>
-          <div class="exp-org">HackerOne · Intigriti · Bugcrowd · BugBase</div>
-          <div class="exp-desc">
-            Conducting vulnerability research and responsible disclosure across web platforms.
-            Experience includes web security assessments, OSINT investigations, and CTF competitions.
-            Achieved Top 10 ranking on TryHackMe in Syria for a one-month period.
-          </div>
-        </div>
-      </div>
-
-      <div class="exp-item fade">
-        <div class="exp-period">2023 — Present</div>
-        <div>
-          <div class="exp-role">Private Tutor</div>
-          <div class="exp-org">Freelance · Damascus</div>
-          <div class="exp-desc">
-            Teaching mathematics, physics, chemistry (grades 1-9), C++, Python, and frontend development.
-            Focus on conceptual depth and structured problem-solving.
-          </div>
-        </div>
-      </div>
-
-      <div class="exp-item fade">
-        <div class="exp-period">2024 — Present</div>
-        <div>
-          <div class="exp-role">Technical Content Creator</div>
-          <div class="exp-org">@cyborg.div · Arabic-Language</div>
-          <div class="exp-desc">
-            Producing educational content on cybersecurity, AI, and programming in Arabic.
-          </div>
-        </div>
-      </div>
-
+        <aside class="hero-card">
+          <div class="hcr"><span class="hcr-key" data-en="Degree" data-ar="الشهادة">Degree</span><span class="hcr-val" data-en="B.Sc. IT Engineering" data-ar="هندسة تقنية معلومات">B.Sc. IT Engineering</span></div>
+          <div class="hcr"><span class="hcr-key" data-en="University" data-ar="الجامعة">University</span><span class="hcr-val" data-en="Antioch Private Syrian Univ." data-ar="جامعة أنطاكية السورية الخاصة">Antioch Private Syrian Univ.</span></div>
+          <div class="hcr"><span class="hcr-key" data-en="Focus" data-ar="التخصص">Focus</span><span class="hcr-val hcr-accent" data-en="AI & Cybersecurity" data-ar="ذكاء اصطناعي وأمن سيبراني">AI &amp; Cybersecurity</span></div>
+          <div class="hcr"><span class="hcr-key" data-en="Open to" data-ar="متاح لـ">Open to</span><span class="hcr-val" data-en="Projects & collaboration" data-ar="مشاريع وتعاون">Projects &amp; collaboration</span></div>
+          <div class="hcr"><span class="hcr-key" data-en="Location" data-ar="الموقع">Location</span><span class="hcr-val" data-en="Damascus, Syria" data-ar="دمشق، سوريا">Damascus, Syria</span></div>
+          <div class="hcr"><span class="hcr-key" data-en="Languages" data-ar="اللغات">Languages</span><span class="hcr-val" data-en="Arabic (native) · English (C1)" data-ar="العربية (الأم) · الإنجليزية (C1)">Arabic (native) · English (C1)</span></div>
+        </aside>
+      </section>
     </div>
-  </div>
 
-  <!-- PROJECTS -->
-  <div class="wrap">
-    <div class="section" id="projects">
-      <div class="sec-header">
-        <p class="sec-label fade">Selected Work</p>
-        <h2 class="sec-title fade">Projects</h2>
-      </div>
-      <div class="projects-grid">
-
-        <div class="project-card fade">
-          <div class="project-index">Security Research</div>
-          <div class="project-title">University Portal — Authorized Security Assessment</div>
-          <div class="project-desc">
-            Full-scope authorized security assessment of a Syrian university web portal.
-            Covered reconnaissance, vulnerability identification, risk evaluation,
-            and remediation reporting.
+    <div class="wrap">
+      <section id="work">
+        <div class="sec-header fade">
+          <p class="sec-label" data-en="Work with me" data-ar="العمل معي">Work with me</p>
+          <h2 class="sec-title" data-en="What I can do for you" data-ar="ما الذي يمكنني تقديمه لك">What I can do for you</h2>
+          <p class="sec-intro" data-en="Three distinct tracks. Each is a service you can engage me for — not a job I'm hoping to land." data-ar="ثلاثة مسارات متمايزة. كلٌّ منها خدمة تستطيع التعاقد معي عليها — لا وظيفة أبحث عنها.">Three distinct tracks. Each is a service you can engage me for — not a job I'm hoping to land.</p>
+        </div>
+        <div class="work-grid">
+          <div class="work-card fade">
+            <div class="work-tag" data-en="01 — Offensive Security" data-ar="01 — أمن هجومي">01 — Offensive Security</div>
+            <h3 class="work-name" data-en="Security Assessments & Bug Bounty" data-ar="تقييمات أمنية وصيد ثغرات">Security Assessments &amp; Bug Bounty</h3>
+            <p class="work-desc" data-en="Authorized web-application security testing, vulnerability assessment, and OSINT exposure reviews — delivered as clear, actionable reports. Active researcher on HackerOne, Intigriti, and Bugcrowd." data-ar="اختبار أمني مُصرَّح به لتطبيقات الويب، تقييم للثغرات، ومراجعة للتعرّض عبر OSINT — تُسلَّم كتقارير واضحة وقابلة للتنفيذ. باحث نشط على HackerOne وIntigriti وBugcrowd.">Authorized web-application security testing, vulnerability assessment, and OSINT exposure reviews — delivered as clear, actionable reports. Active researcher on HackerOne, Intigriti, and Bugcrowd.</p>
+            <div class="work-for"><b data-en="Best for" data-ar="مناسب لـ">Best for</b><span data-en="Teams that want to find weaknesses before someone else does." data-ar="الفرق التي تريد اكتشاف نقاط ضعفها قبل أن يجدها غيرها.">Teams that want to find weaknesses before someone else does.</span></div>
+            <a href="#contact" class="work-link" data-en="Discuss an assessment →" data-ar="ناقش تقييماً ←">Discuss an assessment →</a>
           </div>
-          <div class="tags">
-            <span class="tag">Web Security</span>
-            <span class="tag">Vulnerability Assessment</span>
-            <span class="tag">Formal Report</span>
+          <div class="work-card fade">
+            <div class="work-tag" data-en="02 — AI & Research" data-ar="02 — ذكاء اصطناعي وبحث">02 — AI &amp; Research</div>
+            <h3 class="work-name" data-en="Machine Learning & Research" data-ar="تعلّم آلي وبحث">Machine Learning &amp; Research</h3>
+            <p class="work-desc" data-en="Building and analyzing ML models, data analysis, and applied research — including unsupervised learning on hard mathematical problems. Comfortable from prototype to written analysis." data-ar="بناء وتحليل نماذج التعلّم الآلي، تحليل البيانات، وبحث تطبيقي — يشمل التعلّم غير المُوجَّه على مسائل رياضية صعبة. من النموذج الأولي إلى التحليل المكتوب.">Building and analyzing ML models, data analysis, and applied research — including unsupervised learning on hard mathematical problems. Comfortable from prototype to written analysis.</p>
+            <div class="work-for"><b data-en="Best for" data-ar="مناسب لـ">Best for</b><span data-en="Research collaborations and ML problems that need rigor." data-ar="التعاون البحثي ومسائل التعلّم الآلي التي تتطلب دقة.">Research collaborations and ML problems that need rigor.</span></div>
+            <a href="#contact" class="work-link" data-en="Start a collaboration →" data-ar="ابدأ تعاوناً ←">Start a collaboration →</a>
+          </div>
+          <div class="work-card fade">
+            <div class="work-tag" data-en="03 — Teaching" data-ar="03 — تدريس">03 — Teaching</div>
+            <h3 class="work-name" data-en="Technical Teaching & Content" data-ar="تدريس ومحتوى تقني">Technical Teaching &amp; Content</h3>
+            <p class="work-desc" data-en="Clear, analogy-first teaching of programming, mathematics, and security concepts — one-to-one or as Arabic-language content on @cyborg.div." data-ar="تدريس واضح يبدأ بالتشبيه للبرمجة والرياضيات ومفاهيم الأمن — فردي أو كمحتوى عربي على ‏@cyborg.div.">Clear, analogy-first teaching of programming, mathematics, and security concepts — one-to-one or as Arabic-language content on @cyborg.div.</p>
+            <div class="work-for"><b data-en="Best for" data-ar="مناسب لـ">Best for</b><span data-en="Learners who want depth, not memorization." data-ar="المتعلّمين الذين يريدون العُمق لا الحفظ.">Learners who want depth, not memorization.</span></div>
+            <a href="#contact" class="work-link" data-en="Book a session →" data-ar="احجز جلسة ←">Book a session →</a>
           </div>
         </div>
-
-        <div class="project-card fade">
-          <div class="project-index">Mathematical Research</div>
-          <div class="project-title">Riemann Zeta Zeros — Machine Learning Analysis</div>
-          <div class="project-desc">
-            Research project exploring the application of unsupervised learning techniques
-            to identify structural patterns within non-trivial zeros of the Riemann zeta function.
-          </div>
-          <div class="tags">
-            <span class="tag">Machine Learning</span>
-            <span class="tag">Python</span>
-            <span class="tag">Analytic Number Theory</span>
-          </div>
-        </div>
-
-      </div>
+      </section>
     </div>
-  </div>
 
-  <!-- CERTIFICATIONS -->
-  <div class="wrap">
-    <div class="section" id="certifications">
-      <div class="sec-header">
-        <p class="sec-label fade">Credentials</p>
-        <h2 class="sec-title fade">Certifications</h2>
-      </div>
-
-      <div class="cert-item fade">
-        <span class="cert-name">OSINT Fundamentals</span>
-        <span class="cert-issuer">Security Blue Team</span>
-      </div>
-      <div class="cert-item fade">
-        <span class="cert-name">Machine Learning Specialization</span>
-        <span class="cert-issuer">Coursera · DeepLearning.AI</span>
-      </div>
-      <div class="cert-item fade">
-        <span class="cert-name">Introduction to Cybersecurity</span>
-        <span class="cert-issuer">Cisco</span>
-      </div>
-      <div class="cert-item fade">
-        <span class="cert-name">C1 English Proficiency</span>
-        <span class="cert-issuer">Interchange & Cutting Edge Series</span>
-      </div>
-      <div class="cert-item fade">
-        <span class="cert-name">English for Information Technology</span>
-        <span class="cert-issuer">Specialized Technical Track</span>
-      </div>
-      <div class="cert-item fade">
-        <span class="cert-name">Academic Writing in English</span>
-        <span class="cert-issuer">University-Level Course</span>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- CONTACT -->
-  <div class="wrap">
-    <div class="section" id="contact">
-      <div class="sec-header">
-        <p class="sec-label fade">Contact</p>
-        <h2 class="sec-title fade">Get in Touch</h2>
-      </div>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start;">
-
-        <div class="fade">
-          <p style="font-size:0.95rem; color:var(--muted); line-height:1.9; margin-bottom:2.5rem;">
-            Open to <strong style="color:var(--text); font-weight:500">security research opportunities</strong>,
-            <strong style="color:var(--text); font-weight:500">AI and ML research collaboration</strong>,
-            penetration testing internships, and open source contributions.
-            Response within 48 hours.
-          </p>
-          <div class="contact-links">
-            <a href="/cdn-cgi/l/email-protection#462b2f252e232a68272a2c272206212b272f2a6825292b" class="contact-link">
-              <span class="contact-link-label">Email</span>
-              <span class="contact-link-val"><span class="__cf_email__" data-cfemail="6b060208030e07450a07010a0f2b0c060a020745080406">[email&#160;protected]</span></span>
-            </a>
-            <a href="https://github.com/sand8storm" target="_blank" class="contact-link">
-              <span class="contact-link-label">GitHub</span>
-              <span class="contact-link-val">sand8storm</span>
-            </a>
-            <a href="https://hackerone.com/sand666wind" target="_blank" class="contact-link">
-              <span class="contact-link-label">HackerOne</span>
-              <span class="contact-link-val">sand666wind</span>
-            </a>
-            <a href="https://app.intigriti.com/profile/sand666wind" target="_blank" class="contact-link">
-              <span class="contact-link-label">Intigriti</span>
-              <span class="contact-link-val">sand666wind</span>
-            </a>
-            <a href="https://bugcrowd.com/sand666wind" target="_blank" class="contact-link">
-              <span class="contact-link-label">Bugcrowd</span>
-              <span class="contact-link-val">sand666wind</span>
-            </a>
-            <a href="https://instagram.com/cyborg.div" target="_blank" class="contact-link">
-              <span class="contact-link-label">Instagram</span>
-              <span class="contact-link-val">@cyborg.div</span>
-            </a>
+    <div class="wrap">
+      <section id="proof">
+        <div class="sec-header fade">
+          <p class="sec-label" data-en="Proof of work" data-ar="إثبات العمل">Proof of work</p>
+          <h2 class="sec-title" data-en="Selected work" data-ar="أعمال مختارة">Selected work</h2>
+          <p class="sec-intro" data-en="Trust is the whole product in this line of work. Here is how I think, shown through real engagements." data-ar="الثقة هي المنتج كله في هذا المجال. إليك كيف أفكّر، من خلال أعمال حقيقية.">Trust is the whole product in this line of work. Here is how I think, shown through real engagements.</p>
+        </div>
+        <div class="proof-item fade">
+          <div class="proof-kind" data-en="Security" data-ar="أمن">Security</div>
+          <div>
+            <h3 class="proof-title" data-en="University Portal — Authorized Security Assessment" data-ar="بوابة جامعية — تقييم أمني مُصرَّح به">University Portal — Authorized Security Assessment</h3>
+            <p class="proof-desc" data-en="Full-scope, authorized assessment of a university web portal: reconnaissance, vulnerability identification, risk evaluation, and a formal remediation report handed to the owners." data-ar="تقييم مُصرَّح به وكامل النطاق لبوابة جامعية: استطلاع، تحديد للثغرات، تقييم للمخاطر، وتقرير معالجة رسمي سُلِّم لأصحاب النظام.">Full-scope, authorized assessment of a university web portal: reconnaissance, vulnerability identification, risk evaluation, and a formal remediation report handed to the owners.</p>
+            <p class="proof-takeaway"><b data-en="Shows" data-ar="يُظهر">Shows</b><span data-en="End-to-end methodology and the ability to communicate risk to non-security owners." data-ar="منهجية متكاملة وقدرة على إيصال المخاطر لأصحاب قرار غير أمنيين.">End-to-end methodology and the ability to communicate risk to non-security owners.</span></p>
           </div>
         </div>
-
-        <div class="fade">
-          <div class="contact-note">
-            <p>
-              <span>// Open to</span><br><br>
-              Security Research Opportunities<br>
-              Junior Cybersecurity Roles<br>
-              Penetration Testing Internships<br>
-              AI & ML Research Collaboration<br>
-              Open Source Projects<br><br>
-              <span>// Based in</span> Damascus, Syria<br>
-              <span>// Available</span> Immediately
-            </p>
+        <div class="proof-item fade">
+          <div class="proof-kind" data-en="Security" data-ar="أمن">Security</div>
+          <div>
+            <h3 class="proof-title" data-en="Government Portal — Authorized OSINT Assessment" data-ar="بوابة حكومية — تقييم OSINT مُصرَّح به">Government Portal — Authorized OSINT Assessment</h3>
+            <p class="proof-desc" data-en="Authorized OSINT-driven security assessment of a government web portal, documented in a formal Arabic report with several high- and critical-severity findings and remediation guidance." data-ar="تقييم أمني مُصرَّح به مبني على OSINT لبوابة حكومية، موثَّق في تقرير عربي رسمي مع عدة نتائج عالية وحرجة الخطورة وإرشادات معالجة.">Authorized OSINT-driven security assessment of a government web portal, documented in a formal Arabic report with several high- and critical-severity findings and remediation guidance.</p>
+            <p class="proof-takeaway"><b data-en="Shows" data-ar="يُظهر">Shows</b><span data-en="OSINT depth, formal reporting in Arabic, and responsible handling of sensitive findings." data-ar="عُمق في OSINT، تقارير رسمية بالعربية، وتعامل مسؤول مع النتائج الحساسة.">OSINT depth, formal reporting in Arabic, and responsible handling of sensitive findings.</span></p>
           </div>
         </div>
-
-      </div>
+        <div class="proof-item fade">
+          <div class="proof-kind" data-en="AI / Math" data-ar="ذكاء / رياضيات">AI / Math</div>
+          <div>
+            <h3 class="proof-title" data-en="Riemann Zeta Zeros — Machine-Learning Analysis" data-ar="أصفار زيتا لريمان — تحليل بالتعلّم الآلي">Riemann Zeta Zeros — Machine-Learning Analysis</h3>
+            <p class="proof-desc" data-en="A research project applying unsupervised learning (an autoencoder architecture) to non-trivial zeros of the Riemann zeta function, searching for structural patterns in Odlyzko's data." data-ar="مشروع بحثي يطبّق التعلّم غير المُوجَّه (بنية autoencoder) على الأصفار غير التافهة لدالة زيتا، بحثاً عن أنماط بنيوية في بيانات أودليزكو.">A research project applying unsupervised learning (an autoencoder architecture) to non-trivial zeros of the Riemann zeta function, searching for structural patterns in Odlyzko's data.</p>
+            <p class="proof-takeaway"><b data-en="Shows" data-ar="يُظهر">Shows</b><span data-en="Independent research, ML applied to a genuinely hard problem, and mathematical rigor." data-ar="بحث مستقل، تعلّم آلي مُطبَّق على مسألة صعبة فعلاً، ودقة رياضية.">Independent research, ML applied to a genuinely hard problem, and mathematical rigor.</span></p>
+          </div>
+        </div>
+      </section>
     </div>
-  </div>
+
+    <div class="wrap">
+      <section id="skills">
+        <div class="sec-header fade">
+          <p class="sec-label" data-en="Toolkit" data-ar="الأدوات">Toolkit</p>
+          <h2 class="sec-title" data-en="What I work with" data-ar="ما أعمل به">What I work with</h2>
+        </div>
+        <div class="skills-grid">
+          <div class="skill-card fade">
+            <div class="skill-title" data-en="Security" data-ar="الأمن">Security</div>
+            <div class="tags">
+              <span class="tag">Web Penetration Testing</span>
+              <span class="tag">Vulnerability Assessment</span>
+              <span class="tag">OSINT</span>
+              <span class="tag">Bug Bounty</span>
+              <span class="tag">Security Reporting</span>
+              <span class="tag">Linux / Kali</span>
+            </div>
+          </div>
+          <div class="skill-card fade">
+            <div class="skill-title" data-en="Engineering" data-ar="الهندسة">Engineering</div>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">C++</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">Bash</span>
+              <span class="tag">SQL</span>
+              <span class="tag">Git</span>
+              <span class="tag">Clean Architecture</span>
+            </div>
+          </div>
+          <div class="skill-card fade">
+            <div class="skill-title" data-en="AI & Mathematics" data-ar="ذكاء اصطناعي ورياضيات">AI &amp; Mathematics</div>
+            <div class="tags">
+              <span class="tag">Machine Learning</span>
+              <span class="tag">Neural Networks</span>
+              <span class="tag">NumPy · Pandas</span>
+              <span class="tag">scikit-learn</span>
+              <span class="tag">Number Theory</span>
+              <span class="tag">Linear Algebra</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="wrap">
+      <section id="background">
+        <div class="sec-header fade">
+          <p class="sec-label" data-en="Background" data-ar="الخلفية">Background</p>
+          <h2 class="sec-title" data-en="Experience" data-ar="الخبرة">Experience</h2>
+        </div>
+        <div class="exp-item fade">
+          <div class="exp-period">2024 — Present</div>
+          <div>
+            <div class="exp-role" data-en="Independent Security Researcher" data-ar="باحث أمني مستقل">Independent Security Researcher</div>
+            <div class="exp-org">HackerOne · Intigriti · Bugcrowd</div>
+            <div class="exp-desc" data-en="Vulnerability research and responsible disclosure across web platforms, plus authorized assessments and OSINT investigations. (Reached Top 10 on TryHackMe in Syria for one month.)" data-ar="بحث في الثغرات وإفصاح مسؤول عبر منصات الويب، إضافة لتقييمات مُصرَّح بها وتحقيقات OSINT. (وصلتُ لأفضل 10 على TryHackMe في سوريا لمدة شهر.)">Vulnerability research and responsible disclosure across web platforms, plus authorized assessments and OSINT investigations. (Reached Top 10 on TryHackMe in Syria for one month.)</div>
+          </div>
+        </div>
+        <div class="exp-item fade">
+          <div class="exp-period">2022 — Present</div>
+          <div>
+            <div class="exp-role" data-en="B.Sc. Information Technology Engineering" data-ar="بكالوريوس هندسة تقنية المعلومات">B.Sc. Information Technology Engineering</div>
+            <div class="exp-org" data-en="Antioch Private Syrian University · AI & Cybersecurity" data-ar="جامعة أنطاكية السورية الخاصة · ذكاء اصطناعي وأمن سيبراني">Antioch Private Syrian University · AI &amp; Cybersecurity</div>
+            <div class="exp-desc" data-en="Final-year student. Coursework spans advanced software engineering, machine learning, neural networks, databases, and discrete mathematics." data-ar="طالب في السنة الأخيرة. تشمل المقررات هندسة برمجيات متقدمة، تعلّم آلي، شبكات عصبية، قواعد بيانات، ورياضيات متقطعة.">Final-year student. Coursework spans advanced software engineering, machine learning, neural networks, databases, and discrete mathematics.</div>
+          </div>
+        </div>
+        <div class="exp-item fade">
+          <div class="exp-period">2024 — Present</div>
+          <div>
+            <div class="exp-role" data-en="Technical Educator" data-ar="مُربٍّ تقني">Technical Educator</div>
+            <div class="exp-org" data-en="@cyborg.div · Private tutoring" data-ar="‏@cyborg.div · دروس خصوصية">@cyborg.div · Private tutoring</div>
+            <div class="exp-desc" data-en="Arabic-language educational content on security, AI, and programming, plus one-to-one tutoring in mathematics and programming." data-ar="محتوى تعليمي عربي في الأمن والذكاء الاصطناعي والبرمجة، إضافة لدروس فردية في الرياضيات والبرمجة.">Arabic-language educational content on security, AI, and programming, plus one-to-one tutoring in mathematics and programming.</div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="wrap">
+      <section id="contact">
+        <div class="sec-header fade">
+          <p class="sec-label" data-en="Contact" data-ar="تواصل">Contact</p>
+          <h2 class="sec-title" data-en="Start a conversation" data-ar="لنبدأ حواراً">Start a conversation</h2>
+        </div>
+        <div class="contact-grid">
+          <div class="fade">
+            <p class="contact-lead" data-en="Tell me what you're trying to protect, build, or understand — and I'll tell you honestly whether I'm the right person for it. Typical response within 48 hours." data-ar="أخبِرني بما تريد حمايته أو بناءه أو فهمه — وسأخبرك بصدق إن كنتُ الشخص المناسب له. عادةً أردّ خلال 48 ساعة.">Tell me what you're trying to protect, build, or understand — and I'll tell you honestly whether I'm the right person for it. Typical response within 48 hours.</p>
+            <div class="contact-links">
+              <a href="mailto:michel.aljad@gmail.com" class="contact-link"><span class="cl-label" data-en="Email" data-ar="بريد">Email</span><span class="cl-val">michel.aljad@gmail.com</span></a>
+              <a href="https://github.com/sand8storm" target="_blank" rel="noopener noreferrer" class="contact-link"><span class="cl-label">GitHub</span><span class="cl-val">sand8storm</span></a>
+              <a href="https://hackerone.com/sand666wind" target="_blank" rel="noopener noreferrer" class="contact-link"><span class="cl-label">HackerOne</span><span class="cl-val">sand666wind</span></a>
+              <a href="https://app.intigriti.com/profile/sand666wind" target="_blank" rel="noopener noreferrer" class="contact-link"><span class="cl-label">Intigriti</span><span class="cl-val">sand666wind</span></a>
+              <a href="https://bugcrowd.com/sand666wind" target="_blank" rel="noopener noreferrer" class="contact-link"><span class="cl-label">Bugcrowd</span><span class="cl-val">sand666wind</span></a>
+              <a href="https://instagram.com/cyborg.div" target="_blank" rel="noopener noreferrer" class="contact-link"><span class="cl-label">Instagram</span><span class="cl-val">@cyborg.div</span></a>
+            </div>
+          </div>
+          <div class="fade">
+            <div class="contact-note">
+              <div class="cn-head" data-en="// Open to" data-ar="// متاح لـ">// Open to</div>
+              <ul>
+                <li data-en="Authorized security assessments" data-ar="تقييمات أمنية مُصرَّح بها">Authorized security assessments</li>
+                <li data-en="Bug bounty & VDP engagements" data-ar="برامج صيد ثغرات وإفصاح">Bug bounty &amp; VDP engagements</li>
+                <li data-en="AI / ML research collaboration" data-ar="تعاون بحثي في الذكاء الاصطناعي">AI / ML research collaboration</li>
+                <li data-en="Technical teaching & talks" data-ar="تدريس تقني ومحاضرات">Technical teaching &amp; talks</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
 
   <footer>
     <span class="footer-name">Michel Aljed · cybort.me · © 2026</span>
     <span class="footer-quote">Rigor in reasoning. Precision in code.</span>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
-    }, { threshold: 0.07 });
-    document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+  <script>
+    const langBtn = document.getElementById('langBtn');
+    let lang = 'en';
+    function setLang(next) {
+      lang = next;
+      document.documentElement.lang = next;
+      document.body.dir = next === 'ar' ? 'rtl' : 'ltr';
+      document.querySelectorAll('[data-en]').forEach(el => {
+        const val = el.getAttribute('data-' + next);
+        if (val !== null) el.textContent = val;
+      });
+      langBtn.textContent = next === 'ar' ? 'English' : 'العربية';
+    }
+    langBtn.addEventListener('click', () => setLang(lang === 'en' ? 'ar' : 'en'));
+
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+    menuBtn.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }));
+
+    // Scroll reveal
+    const revealObs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); revealObs.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.fade').forEach(el => revealObs.observe(el));
+
+    // Scroll progress bar
+    const progress = document.getElementById('progress');
+    function onScroll() {
+      const h = document.documentElement;
+      const max = h.scrollHeight - h.clientHeight;
+      progress.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Scrollspy — active nav link
+    const links = [...navLinks.querySelectorAll('a')];
+    const sections = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    const spyObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id));
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    sections.forEach(s => spyObs.observe(s));
   </script>
 </body>
 </html>
