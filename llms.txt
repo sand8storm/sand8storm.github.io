@@ -1,0 +1,32 @@
+# Michel Aljed (ميشيل الجد)
+
+> Michel Aljed is an offensive security engineer and penetration tester based in Damascus, Syria. He tests web applications for security flaws, builds security tooling in Python and C++, and does empirical research in algorithms and machine learning.
+
+Also known as: ميشيل الجد, ميشال الجد, Michel Al-Jed. Online handles: sand8storm (GitHub), sand666wind (HackerOne, Intigriti, Bugcrowd), cyborg.div (Instagram, Arabic-language security content).
+
+## Focus
+- Web application penetration testing (black-box, authorized engagements with Syrian organizations)
+- OSINT-driven security assessments
+- Bug bounty and responsible disclosure on HackerOne, Intigriti, and Bugcrowd
+- Security tool development in Python and C++
+
+## Tools
+- [Beast403](https://github.com/sand8storm/Beast403): released 403/401 bypass scanner, accuracy first. Validates every candidate bypass against a live per-target oracle using SimHash structural classification, with a raw-socket engine to defeat client-side path normalization. 0 false positives across 28 negative targets.
+- SSTIeye (in progress): server-side template injection scanner using randomized arithmetic probes confirmed against a baseline response.
+
+## Research
+- TSP heuristics, a systematic empirical study of 20+ construction, local-search, and metaheuristic methods with paired t-tests.
+- LKH candidate generation, independent verification (MST ∪ Delaunay ∪ k-NN vs α-nearness).
+- Riemann zeta zeros, autoencoder-based analysis of Odlyzko's dataset.
+
+## Background
+- B.Sc. Computer Engineering, Antioch Private Syrian University, Damascus (expected 2027)
+- Reached the top 10 on TryHackMe in Syria
+- Languages: Arabic (native), English (C1)
+
+## Links
+- [Website](https://cyborgt.me/)
+- [CV (PDF)](https://cyborgt.me/Michel_Aljed_CV.pdf)
+- [GitHub](https://github.com/sand8storm)
+- [LinkedIn](https://www.linkedin.com/in/michel-aljed-566240334)
+- [HackerOne](https://hackerone.com/sand666wind)
