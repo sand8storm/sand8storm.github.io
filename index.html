@@ -222,7 +222,7 @@
         "familyName": "Aljed",
         "alternateName": ["ميشيل الجد", "ميشال الجد", "ميشيل ألجد", "ميشيل أل جد", "Michel Al Jed", "Michel Al-Jed", "Michel Aljad"],
         "url": "https://cyborgt.me/",
-        "email": "michel.aljad@gmail.com",
+        "email": "michel@cyborgt.me",
         "jobTitle": "Offensive Security Engineer and Penetration Tester",
         "description": "Offensive security engineer and penetration tester based in Damascus, Syria. Web application penetration testing, OSINT, security tooling in Python and C++, and empirical research in algorithms and machine learning.",
         "knowsLanguage": ["ar", "en"],
@@ -290,7 +290,7 @@
           <div class="hero-cta">
             <a href="#contact" class="btn btn-solid">Discuss an engagement</a>
             <a href="#assessments" class="btn btn-line">See the work</a>
-            <a href="/Michel_Aljed_CV.pdf" download="Michel_Aljed_CV.pdf">Download CV (PDF)</a>       
+            <a href="/Michel_Aljed_CV.pdf" class="btn btn-line" download="Michel_Aljed_CV.pdf">Download CV (PDF)</a>       
           </div>
         </div>
         <dl class="facts">
@@ -298,7 +298,7 @@
           <div><dt>Based in</dt><dd>Damascus, Syria</dd></div>
           <div><dt>Focus</dt><dd>Web application penetration testing, OSINT, security tooling</dd></div>
           <div><dt>Platforms</dt><dd>HackerOne, Intigriti, Bugcrowd</dd></div>
-          <div><dt>Education</dt><dd>B.Sc. Computer Engineering, final year</dd></div>
+          <div><dt>Education</dt><dd>B.Sc. Informatics Engineering — Cybersecurity, final year</dd></div>
           <div><dt>Languages</dt><dd>Arabic (native), English (C1)</dd></div>
         </dl>
       </section>
@@ -353,7 +353,11 @@
             <div>
               <h3>Black-box penetration test</h3>
               <p>Full-scope authorized test of a university web portal: reconnaissance, vulnerability identification, risk evaluation, and a formal remediation report. Findings included exposed remote-management services.</p>
-              <div class="findings"><div><b data-count="15" data-suffix="+">15+</b><span>findings reported</span></div></div>
+              <div class="findings">
+                <div><b data-count="21">21</b><span>findings reported</span></div>
+                <div><b data-count="8">8</b><span>critical</span></div>
+                <div><b data-count="24">24</b><span>matched CVEs</span></div>
+              </div>
               <p class="shows"><b>Shows</b> the full methodology, and reporting written for non-security owners.</p>
             </div>
           </div>
@@ -362,6 +366,11 @@
             <div>
               <h3>OSINT-driven security assessment</h3>
               <p>Authorized assessment built from open-source intelligence, documented in a formal Arabic report with multiple high- and critical-severity findings and remediation guidance.</p>
+              <div class="findings">
+                <div><b data-count="19">19</b><span>subdomains mapped</span></div>
+                <div><b data-count="20">20</b><span>findings</span></div>
+                <div><b data-count="9">9</b><span>critical / high</span></div>
+              </div>
               <p class="shows"><b>Shows</b> OSINT depth and responsible handling of sensitive findings.</p>
             </div>
           </div>
@@ -371,6 +380,14 @@
               <h3>Black-box penetration test</h3>
               <p>Authorized test of a commercial web portal, delivered with the same methodology and report structure as the university engagement.</p>
               <p class="shows"><b>Shows</b> the same process applied to a business, not only an academic environment.</p>
+            </div>
+          </div>
+          <div class="item">
+            <div class="kind">International SRC</div>
+            <div>
+              <h3>Exposed API gateway dashboard — responsible disclosure</h3>
+              <p>Identified an Apache APISIX admin dashboard exposed to the public internet on a global device manufacturer's infrastructure, verified ownership independently via its TLS certificate, and reported it to the vendor's Security Response Center (triaged Informative).</p>
+              <p class="shows"><b>Shows</b> responsible disclosure to an international vendor and independent verification, not scanner output.</p>
             </div>
           </div>
         </div>
@@ -416,6 +433,15 @@
               <summary>Why randomized probes</summary>
               <p>A fixed payload such as <code>{{7*7}}</code> can be blocked by a signature or appear in a page by coincidence. A random expression with a random expected result only passes when the server actually evaluated it.</p>
             </details>
+          </article>
+
+          <article class="tool">
+            <div class="tool-head">
+              <h3>Pentest RAG assistant</h3>
+              <span class="status wip">In progress</span>
+            </div>
+            <div class="tag">Local LLM specialized for offensive-security workflows. Python.</div>
+            <p>A locally-run language model (Qwen via Ollama) grounded with a retrieval layer over pentest and bug-bounty references, aimed at automating the routine, static parts of reconnaissance and reporting while keeping data on-device.</p>
           </article>
         </div>
       </section>
@@ -505,7 +531,8 @@
             <ul>
               <li><div>Introduction to Cybersecurity<small>Cisco Networking Academy</small></div><span>2026</span></li>
               <li><div>Introduction to OSINT<small>Security Blue Team</small></div><span>2025</span></li>
-              <li><div>CompTIA PenTest+ (PT0-003) exam preparation<small>Packt via Coursera</small></div><span>2025</span></li>
+              <li><div>CompTIA PenTest+ (PT0-003) exam preparation<small>Packt via Coursera</small></div><span>2026</span></li>
+              <li><div>Supervised Machine Learning: Regression &amp; Classification<small>DeepLearning.AI &amp; Stanford via Coursera</small></div><span>2026</span></li>
             </ul>
           </div>
         </div>
