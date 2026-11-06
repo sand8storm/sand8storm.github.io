@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="referrer" content="strict-origin-when-cross-origin"/>
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1"/>
+  <link rel="canonical" href="https://cyborgt.me/beast403"/>
+
+  <title>Beast403 — Verification-First 403/401 Bypass Detection · Michel Aljed</title>
+  <meta name="description" content="Beast403 is a 403/401 access-control bypass scanner built around one rule: a bypass is only reported after it is confirmed against a live per-target oracle using structural (SimHash) comparison. Design, benchmark, and the honest recall gap."/>
+  <meta name="keywords" content="Beast403, 403 bypass, 401 bypass, access control, SimHash, SSRF, false positives, Michel Aljed, offensive security"/>
+  <meta name="author" content="Michel Aljed"/>
+
+  <meta property="og:type" content="article"/>
+  <meta property="og:title" content="Beast403 — Verification-First 403/401 Bypass Detection"/>
+  <meta property="og:description" content="A 403/401 bypass scanner that verifies every candidate against a live oracle before reporting it. Design, benchmark, and the honest recall gap."/>
+  <meta property="og:url" content="https://cyborgt.me/beast403"/>
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%2335584D'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='19' font-style='italic' fill='%23EEF0EB' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E"/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Public+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --paper:#ECEEE9; --paper-2:#E3E6E0; --card:#F5F6F3;
+      --ink:#23292B; --ink-2:#4E5654; --quiet:#7F8884; --rule:#CDD2CC;
+      --accent:#35584D; --accent-2:#2A4840; --accent-soft:rgba(53,88,77,0.10);
+      --serif:'Newsreader',Georgia,'Times New Roman',serif;
+      --sans:'Public Sans',-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
+      --max:820px; --gutter:clamp(1.25rem,4vw,3rem);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-weight:400;font-size:1rem;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+    a{color:inherit;}
+    :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px;}
+    ::selection{background:var(--accent);color:var(--paper);}
+    code{font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;font-size:0.9em;background:var(--paper-2);padding:0.1em 0.35em;border-radius:4px;}
+
+    .nav{position:sticky;top:0;z-index:50;background:rgba(236,238,233,0.84);backdrop-filter:blur(14px) saturate(120%);border-bottom:1px solid var(--rule);}
+    .nav-in{max-width:var(--max);margin:0 auto;padding:0 var(--gutter);height:64px;display:flex;align-items:center;justify-content:space-between;gap:2rem;}
+    .brand{font-family:var(--serif);font-size:1.35rem;font-style:italic;text-decoration:none;letter-spacing:-0.01em;}
+    .back{font-size:0.86rem;color:var(--ink-2);text-decoration:none;border-bottom:1px solid transparent;transition:color .2s,border-color .2s;}
+    .back:hover{color:var(--accent);border-bottom-color:var(--accent);}
+
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gutter);}
+    header.hd{padding-block:clamp(3rem,7vw,5rem) 2.5rem;border-bottom:1px solid var(--rule);}
+    .kicker{font-size:0.82rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);margin-bottom:1.1rem;}
+    h1{font-family:var(--serif);font-weight:300;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1.02;letter-spacing:-0.02em;font-variation-settings:"opsz" 60;}
+    h1 em{font-style:italic;color:var(--accent);}
+    .lead{margin-top:1.4rem;font-size:1.12rem;line-height:1.7;color:var(--ink-2);max-width:40em;}
+    .meta{margin-top:1.6rem;display:flex;flex-wrap:wrap;gap:0.6rem;}
+    .pill{font-size:0.8rem;color:var(--accent);background:var(--accent-soft);padding:0.3rem 0.75rem;border-radius:999px;}
+    .meta a.pill{text-decoration:none;}
+    .meta a.pill:hover{background:var(--accent);color:var(--paper);}
+
+    section{padding-block:clamp(2.5rem,5vw,3.5rem);border-bottom:1px solid var(--rule);}
+    h2{font-family:var(--serif);font-weight:400;font-size:1.75rem;letter-spacing:-0.01em;margin-bottom:1rem;}
+    h3{font-family:var(--serif);font-weight:500;font-size:1.2rem;margin:1.6rem 0 0.5rem;}
+    p{margin-bottom:1rem;max-width:42em;}
+    p.tight{max-width:42em;}
+    ol,ul{margin:0 0 1rem 1.2rem;max-width:42em;}
+    li{margin-bottom:0.5rem;}
+    strong{font-weight:600;color:var(--ink);}
+
+    .flow{display:flex;flex-wrap:wrap;gap:0.5rem;align-items:stretch;margin:1.25rem 0;}
+    .stage{flex:1;min-width:120px;background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:0.9rem;text-align:center;}
+    .stage b{display:block;font-family:var(--serif);font-size:1.05rem;}
+    .stage span{font-size:0.78rem;color:var(--quiet);}
+    .stage.verdict{border-color:var(--accent);background:var(--accent-soft);}
+    .arrow{display:flex;align-items:center;color:var(--quiet);font-size:1.2rem;}
+    @media(max-width:640px){.flow{flex-direction:column;}.arrow{justify-content:center;transform:rotate(90deg);}}
+
+    table{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:0.92rem;}
+    th,td{text-align:left;padding:0.7rem 0.9rem;border-bottom:1px solid var(--rule);}
+    th{font-weight:500;color:var(--accent);font-size:0.82rem;letter-spacing:0.03em;text-transform:uppercase;}
+    tbody tr:hover{background:var(--card);}
+    td.n{font-variant-numeric:tabular-nums;}
+
+    .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.5rem 0;}
+    .metric{background:var(--card);border:1px solid var(--rule);border-radius:14px;padding:1.25rem;text-align:center;}
+    .metric b{display:block;font-family:var(--serif);font-weight:400;font-size:2.2rem;line-height:1;color:var(--accent);}
+    .metric span{display:block;margin-top:0.5rem;font-size:0.8rem;color:var(--quiet);}
+
+    .note{background:var(--card);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:1.1rem 1.25rem;margin:1.5rem 0;font-size:0.95rem;color:var(--ink-2);}
+    .note b{color:var(--ink);}
+
+    .refs{columns:1;font-size:0.86rem;color:var(--ink-2);}
+    .refs li{margin-bottom:0.7rem;}
+    .refs i{font-style:italic;}
+
+    footer{padding-block:2rem;}
+    .foot{max-width:var(--max);margin:0 auto;padding:0 var(--gutter);display:flex;justify-content:space-between;gap:1rem;font-size:0.82rem;color:var(--quiet);flex-wrap:wrap;}
+    .foot em{font-family:var(--serif);font-size:0.95rem;}
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"TechArticle",
+    "headline":"Beast403 — Verification-First 403/401 Bypass Detection",
+    "description":"A 403/401 access-control bypass scanner that confirms every candidate bypass against a live per-target oracle using structural (SimHash) comparison before reporting it.",
+    "author":{"@type":"Person","name":"Michel Aljed","url":"https://cyborgt.me/"},
+    "about":["Access control","403 bypass","Web application security","SimHash"],
+    "url":"https://cyborgt.me/beast403",
+    "inLanguage":"en"
+  }
+  </script>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="nav-in">
+      <a href="/" class="brand">Michel Aljed</a>
+      <a href="/#tooling" class="back">← Back to tooling</a>
+    </div>
+  </header>
+
+  <main>
+    <header class="hd">
+      <div class="wrap">
+        <p class="kicker">Security tooling · Case study</p>
+        <h1>Beast403: proving a 403 bypass <em>before</em> reporting it</h1>
+        <p class="lead">Every 403/401 bypass tool draws on the same handful of techniques. The difference that matters is not the payload — it is how strictly a tool verifies that a bypass actually happened. Beast403 is built around that single discipline.</p>
+        <div class="meta">
+          <span class="pill">Python · pip install beast403</span>
+          <span class="pill">Supervised semester project</span>
+          <a class="pill" href="https://github.com/sand8storm/Beast403" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+          <a class="pill" href="https://pypi.org/project/beast403/" target="_blank" rel="noopener noreferrer">PyPI ↗</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="wrap">
+
+      <section>
+        <h2>The problem: false positives, not missing techniques</h2>
+        <p>During access-control testing, a 403 or 401 on a protected path is often a misconfiguration away from being reachable. The existing tooling automates the attempt — mangling the path, injecting headers, swapping the protocol or the verb — and most of it decides success from the status code alone. A page that happens to return 200, or a catch-all that answers everything, reads as a bypass that never happened.</p>
+        <p>The whole category inherits this from one lineage of techniques (Orange Tsai's path-normalization work, and the 4xx-bypass tools built on it). So the real axis of comparison is not <em>which tricks</em> a tool knows — they mostly know the same ones — but <strong>how rigorously it confirms a hit</strong>. Beast403 was built to move that bar.</p>
+      </section>
+
+      <section>
+        <h2>Design: one layer decides</h2>
+        <p>The tool is five separated layers. Data flows one way, and only a single layer is ever allowed to issue the verdict, whatever the technique that produced the candidate.</p>
+        <div class="flow">
+          <div class="stage"><b>Techniques</b><span>generate candidates</span></div>
+          <div class="arrow">→</div>
+          <div class="stage"><b>Engine</b><span>raw-socket send</span></div>
+          <div class="arrow">→</div>
+          <div class="stage"><b>Analysis</b><span>structural signature</span></div>
+          <div class="arrow">→</div>
+          <div class="stage"><b>Calibrator</b><span>live oracles</span></div>
+          <div class="arrow">→</div>
+          <div class="stage verdict"><b>Verifier</b><span>the only judge</span></div>
+        </div>
+        <h3>Raw-socket engine</h3>
+        <p>Requests are sent over a raw socket rather than a client library, so a crafted path is delivered exactly as written — no client-side normalization quietly rewrites the bypass before it reaches the server.</p>
+        <h3>Structural fingerprint (SimHash)</h3>
+        <p>The analysis layer does not compare page bytes. It extracts the tag/structure sequence of a response, drops dynamic noise (visible text, numbers, timestamps, JSON values), and reduces what remains to a SimHash. Two pages built from the same template collide to the same fingerprint even when their content differs — so "same page, different data" no longer looks like a new result.</p>
+        <h3>Live per-target oracles</h3>
+        <p>Before firing any candidate, the calibrator builds four reference points <em>for that specific target</em>: the protected page, random non-existent paths (the guaranteed-404 shape), the generic/landing page, and an authorized reference where credentials exist. Because the oracles are built live, they capture that server's actual behaviour instead of an assumption baked into the tool.</p>
+      </section>
+
+      <section>
+        <h2>Dropping false positives in five stages</h2>
+        <p>A candidate is not accepted because its status code looks good. The verifier walks it through five rejections first:</p>
+        <ol>
+          <li><strong>Disguised block</strong> — a page that carries the block's structure but answers 200.</li>
+          <li><strong>Catch-all</strong> — if random paths return the same page, any "bypass" that matches it is meaningless.</li>
+          <li><strong>Non-existence</strong> — matches the guaranteed-404 shape.</li>
+          <li><strong>Generic page</strong> — resolves to the landing/redirect page rather than the protected resource.</li>
+          <li><strong>Textual refusal</strong> — the body still carries block or login language even at 200.</li>
+        </ol>
+        <p>Only a candidate that survives all five, measured against the live oracles, is reported — with the confidence and the reasons recorded, so each verdict is auditable instead of a black box.</p>
+      </section>
+
+      <section>
+        <h2>Benchmark</h2>
+        <p>Beast403 was measured against a formal benchmark with a direct comparison to <code>nomore403</code>, across multiple server types behind and in front of a WAF, on a test bed with eight deliberately-planted access-control bypasses.</p>
+        <table>
+          <thead><tr><th>Server</th><th>Tool</th><th class="n">TP</th><th class="n">FP</th><th>Bypasses found</th></tr></thead>
+          <tbody>
+            <tr><td>Nginx</td><td>Beast403</td><td class="n">4</td><td class="n">0</td><td>4 / 8</td></tr>
+            <tr><td>Nginx</td><td>nomore403</td><td class="n">2</td><td class="n">0</td><td>2 / 8</td></tr>
+            <tr><td>Apache</td><td>Beast403</td><td class="n">3</td><td class="n">0</td><td>3 / 8</td></tr>
+            <tr><td>Apache</td><td>nomore403</td><td class="n">—</td><td class="n">8</td><td>—</td></tr>
+          </tbody>
+        </table>
+        <p>On Apache, <code>nomore403</code> produced eight false positives — empty 200-after-OPTIONS responses it classified as bypasses. Beast403 reported none, because the structural comparison rejected the empty/landing-shaped responses.</p>
+        <div class="metrics">
+          <div class="metric"><b>100%</b><span>precision (extended run)</span></div>
+          <div class="metric"><b>0</b><span>false positives across 28 negative targets</span></div>
+          <div class="metric"><b>67%</b><span>recall</span></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>The recall gap, reported not hidden</h2>
+        <div class="note">
+          <p style="margin:0"><b>33% of bypasses were missed, and the cause is known.</b> The misses were responses served as JSON with no HTML tag structure — the structural fingerprint has little to work with, so a real bypass behind a JSON API can be rejected. The fix (a JSON-aware fingerprint) is scoped; until it lands, the number is published <em>with its explanation</em> rather than rounded away. A verification-first tool that hid its own recall gap would be contradicting its own premise.</p>
+        </div>
+        <p>Planned next: a JSON-aware signature, context-aware bypasses that key off the application's own behaviour, and protocol-level coverage for HTTP/2 and HTTP/3.</p>
+      </section>
+
+      <section>
+        <h2>References</h2>
+        <ol class="refs">
+          <li>OWASP. <i>OWASP Top 10:2021 — A01: Broken Access Control.</i></li>
+          <li>Orange Tsai. <i>Breaking Parser Logic: Take Your Path Normalization Off and Pop 0days Out!</i> Black Hat USA 2018 / DEF CON 26.</li>
+          <li>M. S. Charikar. <i>Similarity Estimation Techniques from Rounding Algorithms.</i> STOC 2002. doi:10.1145/509907.509965.</li>
+          <li>devploit. <i>nomore403 — Advanced 403/40X bypass tool.</i> GitHub.</li>
+          <li>Dheerajmadhukar. <i>4-ZERO-3 — 403/401 bypass methods + automation.</i> GitHub.</li>
+          <li>lobuhi. <i>byp4xx — 40X/HTTP bypasser.</i> GitHub.</li>
+          <li>I. Sincek. <i>forbidden — Bypass 4xx HTTP response status codes.</i> GitHub.</li>
+          <li>T. Guta. <i>403-Forbidden-Buster.</i> GitHub.</li>
+          <li>ProjectDiscovery. <i>Nuclei Templates — xff-403-bypass false positive (Issue #6306).</i></li>
+          <li>Sprocket Security. <i>Forbidden! Are 403 Bypasses Worth Looking For?</i></li>
+          <li>A. Sharma, A. Tyagi, P. Khatri, R. Garg. <i>Enhanced 403 Bypass Mechanism for Web Security.</i> ICACITE 2024, IEEE. doi:10.1109/ICACITE60783.2024.10617037.</li>
+          <li>M. Aljed. <i>Beast403 — Verification-first 403/401 access-control bypass detection tool.</i> GitHub.</li>
+        </ol>
+      </section>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="foot">
+      <span>Michel Aljed · cyborgt.me · © 2026</span>
+      <em>Verify first. Then report.</em>
+    </div>
+  </footer>
+
+</body>
+</html>

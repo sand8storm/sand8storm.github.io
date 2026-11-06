@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'sha256-Y9QnXm9NXFZwovzCXUWXbEpYwP6lc0yCvDSaRqe21qQ=' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'sha256-v3Ws24zbB3AWOvDn3BLIbjOVUeEcgrkcSEI6s0Pr/5E=' https://static.cloudflareinsights.com; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests"/>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'sha256-ojNQEX5fDwNqHPqHOCBIrO0GHFz8HUDSiz1bo1se8FU=' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'sha256-v3Ws24zbB3AWOvDn3BLIbjOVUeEcgrkcSEI6s0Pr/5E=' https://static.cloudflareinsights.com; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests"/>
   <meta name="referrer" content="strict-origin-when-cross-origin"/>
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1"/>
   <meta name="googlebot" content="index, follow"/>
@@ -119,6 +119,8 @@
     .track .for b { font-weight: 500; color: var(--accent); }
     .track .go { display: inline-block; margin-top: 0.7rem; font-size: 0.86rem; color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--rule); transition: border-color 0.2s; }
     .track .go:hover { border-color: var(--accent); }
+    .item .go { display: inline-block; margin-top: 0.7rem; font-size: 0.86rem; color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--rule); transition: border-color 0.2s; }
+    .item .go:hover { border-color: var(--accent); }
 
     /* lists (assessments, research) */
     .list { border-top: 1px solid var(--rule); }
@@ -420,6 +422,7 @@
             </details>
             <a class="repo" href="https://github.com/sand8storm/Beast403" target="_blank" rel="noopener noreferrer">github.com/sand8storm/Beast403</a>
             <a class="repo" href="https://pypi.org/project/beast403/" target="_blank" rel="noopener noreferrer">pypi.org/project/beast403</a>
+            <a class="repo" href="/beast403">Read the case study →</a>
           </article>
 
           <article class="tool">
@@ -477,6 +480,15 @@
               <h3>Riemann zeta zeros, machine-learning analysis</h3>
               <p>Applied an autoencoder-based unsupervised approach to the non-trivial zeros of the Riemann zeta function, using Odlyzko's dataset to look for structural patterns.</p>
               <p class="shows"><b>Shows</b> unsupervised learning applied to a genuinely hard mathematical object.</p>
+            </div>
+          </div>
+          <div class="item">
+            <div class="kind">Writeup</div>
+            <div>
+              <h3>Why hasn't Syria been fully breached — yet?</h3>
+              <p>An opinion piece built on open-source intelligence and passive scanning of Syria's digital infrastructure: the gap between how exposed it is and how few incidents are reported, and why that protection may vanish with the return to international banking.</p>
+              <p class="shows"><b>Shows</b> OSINT-driven analysis and responsible, aggregate-only reporting (Arabic).</p>
+              <a class="go" href="/writeups/why-syria">اقرأ المقال →</a>
             </div>
           </div>
         </div>
