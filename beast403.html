@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'sha256-HyuQzWtepu0nGrqUTYh9AubsByJDNl85Frto8H30A+s=' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' https://static.cloudflareinsights.com; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests"/>
   <meta name="referrer" content="strict-origin-when-cross-origin"/>
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1"/>
   <link rel="canonical" href="https://cyborgt.me/beast403"/>
@@ -16,6 +17,13 @@
   <meta property="og:title" content="Beast403 — Verification-First 403/401 Bypass Detection"/>
   <meta property="og:description" content="A 403/401 bypass scanner that verifies every candidate against a live oracle before reporting it. Design, benchmark, and the honest recall gap."/>
   <meta property="og:url" content="https://cyborgt.me/beast403"/>
+  <meta property="og:site_name" content="Michel Aljed"/>
+  <meta property="og:image" content="https://cyborgt.me/og-image.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:image" content="https://cyborgt.me/og-image.png"/>
+  <meta name="theme-color" content="#ECEEE9"/>
 
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%2335584D'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='19' font-style='italic' fill='%23EEF0EB' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E"/>
 
@@ -79,14 +87,19 @@
     th{font-weight:500;color:var(--accent);font-size:0.82rem;letter-spacing:0.03em;text-transform:uppercase;}
     tbody tr:hover{background:var(--card);}
     td.n{font-variant-numeric:tabular-nums;}
+    .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1.25rem 0;}
+    .table-wrap table{margin:0;min-width:480px;}
+    @media(max-width:640px){th,td{padding:0.6rem 0.55rem;}}
 
-    .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.5rem 0;}
+    .metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin:1.5rem 0;}
+    @media(max-width:520px){.metrics{grid-template-columns:1fr;}}
     .metric{background:var(--card);border:1px solid var(--rule);border-radius:14px;padding:1.25rem;text-align:center;}
     .metric b{display:block;font-family:var(--serif);font-weight:400;font-size:2.2rem;line-height:1;color:var(--accent);}
     .metric span{display:block;margin-top:0.5rem;font-size:0.8rem;color:var(--quiet);}
 
     .note{background:var(--card);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:1.1rem 1.25rem;margin:1.5rem 0;font-size:0.95rem;color:var(--ink-2);}
     .note b{color:var(--ink);}
+    .note p{margin:0;}
 
     .refs{columns:1;font-size:0.86rem;color:var(--ink-2);}
     .refs li{margin-bottom:0.7rem;}
@@ -101,9 +114,14 @@
   {
     "@context":"https://schema.org",
     "@type":"TechArticle",
+    "@id":"https://cyborgt.me/beast403#article",
+    "mainEntityOfPage":"https://cyborgt.me/beast403",
+    "image":"https://cyborgt.me/og-image.png",
+    "isPartOf":{"@id":"https://cyborgt.me/#website"},
+    "publisher":{"@id":"https://cyborgt.me/#person"},
     "headline":"Beast403 — Verification-First 403/401 Bypass Detection",
     "description":"A 403/401 access-control bypass scanner that confirms every candidate bypass against a live per-target oracle using structural (SimHash) comparison before reporting it.",
-    "author":{"@type":"Person","name":"Michel Aljed","url":"https://cyborgt.me/"},
+    "author":{"@type":"Person","@id":"https://cyborgt.me/#person","name":"Michel Aljed","url":"https://cyborgt.me/"},
     "about":["Access control","403 bypass","Web application security","SimHash"],
     "url":"https://cyborgt.me/beast403",
     "inLanguage":"en"
@@ -180,7 +198,7 @@
       <section>
         <h2>Benchmark</h2>
         <p>Beast403 was measured against a formal benchmark with a direct comparison to <code>nomore403</code>, across multiple server types behind and in front of a WAF, on a test bed with eight deliberately-planted access-control bypasses.</p>
-        <table>
+        <div class="table-wrap"><table>
           <thead><tr><th>Server</th><th>Tool</th><th class="n">TP</th><th class="n">FP</th><th>Bypasses found</th></tr></thead>
           <tbody>
             <tr><td>Nginx</td><td>Beast403</td><td class="n">4</td><td class="n">0</td><td>4 / 8</td></tr>
@@ -188,7 +206,7 @@
             <tr><td>Apache</td><td>Beast403</td><td class="n">3</td><td class="n">0</td><td>3 / 8</td></tr>
             <tr><td>Apache</td><td>nomore403</td><td class="n">—</td><td class="n">8</td><td>—</td></tr>
           </tbody>
-        </table>
+        </table></div>
         <p>On Apache, <code>nomore403</code> produced eight false positives — empty 200-after-OPTIONS responses it classified as bypasses. Beast403 reported none, because the structural comparison rejected the empty/landing-shaped responses.</p>
         <div class="metrics">
           <div class="metric"><b>100%</b><span>precision (extended run)</span></div>
@@ -200,7 +218,7 @@
       <section>
         <h2>The recall gap, reported not hidden</h2>
         <div class="note">
-          <p style="margin:0"><b>33% of bypasses were missed, and the cause is known.</b> The misses were responses served as JSON with no HTML tag structure — the structural fingerprint has little to work with, so a real bypass behind a JSON API can be rejected. The fix (a JSON-aware fingerprint) is scoped; until it lands, the number is published <em>with its explanation</em> rather than rounded away. A verification-first tool that hid its own recall gap would be contradicting its own premise.</p>
+          <p><b>33% of bypasses were missed, and the cause is known.</b> The misses were responses served as JSON with no HTML tag structure — the structural fingerprint has little to work with, so a real bypass behind a JSON API can be rejected. The fix (a JSON-aware fingerprint) is scoped; until it lands, the number is published <em>with its explanation</em> rather than rounded away. A verification-first tool that hid its own recall gap would be contradicting its own premise.</p>
         </div>
         <p>Planned next: a JSON-aware signature, context-aware bypasses that key off the application's own behaviour, and protocol-level coverage for HTTP/2 and HTTP/3.</p>
       </section>
@@ -228,7 +246,7 @@
 
   <footer>
     <div class="foot">
-      <span>Michel Aljed · cyborgt.me · © 2026</span>
+      <span><a href="/">Michel Aljed</a> · cyborgt.me · © 2026 · <a href="/ar" hreflang="ar" lang="ar">العربية</a></span>
       <em>Verify first. Then report.</em>
     </div>
   </footer>

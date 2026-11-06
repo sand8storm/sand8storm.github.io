@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'sha256-h6awdGRqJ+/4OiWPDLLspOdtofH/iS0w8Xr2b27kQSM=' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' https://static.cloudflareinsights.com; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests"/>
+  <meta name="referrer" content="strict-origin-when-cross-origin"/>
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1"/>
+  <link rel="canonical" href="https://cyborgt.me/ar"/>
+  <link rel="alternate" hreflang="ar" href="https://cyborgt.me/ar"/>
+  <link rel="alternate" hreflang="en" href="https://cyborgt.me/"/>
+  <link rel="alternate" hreflang="x-default" href="https://cyborgt.me/"/>
+  <meta name="theme-color" content="#ECEEE9"/>
+
+  <title>اختبار اختراق وأمن تطبيقات الويب في دمشق، سوريا · Michel Aljed (ميشيل الجد)</title>
+  <meta name="description" content="ميشيل الجد (Michel Aljed)، مهندس أمن هجومي ومختبر اختراق في دمشق. اختبار اختراق مصرّح لتطبيقات الويب والـ API، مراجعة الانكشاف عبر المصادر المفتوحة (OSINT)، وتقارير معالجة واضحة للشركات والمؤسسات في سوريا."/>
+  <meta name="author" content="Michel Aljed"/>
+
+  <meta property="og:type" content="profile"/>
+  <meta property="og:site_name" content="Michel Aljed"/>
+  <meta property="og:title" content="اختبار اختراق وأمن تطبيقات الويب في دمشق، سوريا · Michel Aljed"/>
+  <meta property="og:description" content="اختبار اختراق مصرّح لتطبيقات الويب والـ API، ومراجعة الانكشاف عبر المصادر المفتوحة، للشركات والمؤسسات في سوريا."/>
+  <meta property="og:url" content="https://cyborgt.me/ar"/>
+  <meta property="og:image" content="https://cyborgt.me/og-image.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:locale" content="ar_SY"/>
+  <meta property="og:locale:alternate" content="en_US"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:image" content="https://cyborgt.me/og-image.png"/>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%2335584D'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='19' font-style='italic' fill='%23EEF0EB' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E"/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;1,6..72,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --paper:#ECEEE9; --paper-2:#E3E6E0; --card:#F5F6F3;
+      --ink:#23292B; --ink-2:#4E5654; --quiet:#7F8884; --rule:#CDD2CC;
+      --accent:#35584D; --accent-2:#2A4840; --accent-soft:rgba(53,88,77,0.10);
+      --ar:'IBM Plex Sans Arabic',-apple-system,'Segoe UI',Tahoma,sans-serif;
+      --serif:'Newsreader',Georgia,'Times New Roman',serif;
+      --max:1040px; --gutter:clamp(1.25rem,4vw,3rem);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--paper);color:var(--ink);font-family:var(--ar);font-size:1.02rem;line-height:1.9;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+    a{color:inherit;}
+    :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px;}
+    ::selection{background:var(--accent);color:var(--paper);}
+    .ltr{direction:ltr;unicode-bidi:isolate;}
+
+    .nav{position:sticky;top:0;z-index:50;background:rgba(236,238,233,0.84);backdrop-filter:blur(14px) saturate(120%);border-bottom:1px solid var(--rule);}
+    .nav-in{max-width:var(--max);margin:0 auto;padding:0 var(--gutter);height:64px;display:flex;align-items:center;justify-content:space-between;gap:1rem;}
+    .brand{font-family:var(--serif);font-size:1.35rem;font-style:italic;text-decoration:none;letter-spacing:-0.01em;direction:ltr;}
+    .nav-links{display:flex;gap:1.4rem;list-style:none;align-items:center;}
+    .nav-links a{font-size:0.9rem;color:var(--ink-2);text-decoration:none;}
+    .nav-links a:hover{color:var(--accent);}
+    .lang{border:1px solid var(--rule);border-radius:999px;padding:0.2rem 0.8rem;font-family:var(--serif);}
+
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gutter);}
+    .hero{padding-block:clamp(3rem,8vw,5.5rem) clamp(2.5rem,6vw,4rem);}
+    .kicker{font-size:0.95rem;color:var(--accent);font-weight:500;margin-bottom:1rem;}
+    h1{font-weight:600;font-size:clamp(2rem,5.2vw,3.3rem);line-height:1.35;max-width:18em;}
+    .lead{margin-top:1.4rem;font-size:1.12rem;color:var(--ink-2);max-width:38em;}
+    .who{margin-top:1.2rem;font-size:0.95rem;color:var(--quiet);}
+    .who b{font-family:var(--serif);font-style:italic;font-weight:400;font-size:1.15rem;color:var(--ink);}
+    .cta{margin-top:2rem;display:flex;gap:0.75rem;flex-wrap:wrap;}
+    .btn{display:inline-flex;align-items:center;font:inherit;font-size:0.95rem;font-weight:500;padding:0.75rem 1.4rem;border-radius:999px;text-decoration:none;transition:background .2s,border-color .2s;}
+    .btn-solid{background:var(--accent);color:var(--paper);border:1px solid var(--accent);}
+    .btn-solid:hover{background:var(--accent-2);border-color:var(--accent-2);}
+    .btn-line{border:1px solid var(--rule);color:var(--ink);}
+    .btn-line:hover{border-color:var(--ink);}
+
+    section{padding-block:clamp(2.75rem,6vw,4.25rem);border-top:1px solid var(--rule);}
+    h2{font-weight:600;font-size:1.6rem;line-height:1.4;margin-bottom:0.6rem;}
+    .intro{color:var(--ink-2);max-width:42em;margin-bottom:1.75rem;}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;}
+    .card{background:var(--card);border:1px solid var(--rule);border-radius:16px;padding:1.5rem;}
+    .card h3{font-weight:600;font-size:1.15rem;margin-bottom:0.5rem;}
+    .card p{color:var(--ink-2);font-size:0.95rem;}
+    .card .for{margin-top:0.8rem;font-size:0.9rem;color:var(--ink);}
+    .card .for b{color:var(--accent);font-weight:500;}
+
+    ol.steps{list-style:none;counter-reset:s;display:grid;gap:0.9rem;max-width:46em;}
+    ol.steps li{counter-increment:s;display:grid;grid-template-columns:2.4rem 1fr;gap:0.8rem;align-items:start;}
+    ol.steps li::before{content:counter(s);display:grid;place-items:center;width:2.1rem;height:2.1rem;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-weight:600;}
+    ol.steps b{display:block;}
+    ol.steps span{color:var(--ink-2);font-size:0.95rem;}
+
+    .list{border-top:1px solid var(--rule);}
+    .item{display:grid;grid-template-columns:150px 1fr;gap:1.5rem;padding:1.4rem 0;border-bottom:1px solid var(--rule);}
+    .item .kind{color:var(--quiet);font-size:0.9rem;}
+    .item h3{font-weight:600;font-size:1.1rem;}
+    .item p{color:var(--ink-2);font-size:0.95rem;margin-top:0.3rem;max-width:44em;}
+    .nums{display:flex;gap:2rem;margin-top:0.7rem;flex-wrap:wrap;}
+    .nums b{display:block;font-family:var(--serif);font-weight:400;font-size:1.7rem;line-height:1.1;}
+    .nums span{font-size:0.82rem;color:var(--quiet);}
+    .note{margin-top:1.25rem;font-size:0.9rem;color:var(--quiet);max-width:46em;}
+
+    .more a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--rule);}
+    .more a:hover{border-color:var(--accent);}
+    .more li{margin-bottom:0.7rem;}
+    .more ul{list-style:none;}
+
+    .links{margin-top:1.5rem;border-top:1px solid var(--ink);max-width:560px;}
+    .links a{display:grid;grid-template-columns:110px 1fr;gap:1rem;padding:0.8rem 0;border-bottom:1px solid var(--rule);text-decoration:none;font-size:0.95rem;}
+    .links a:hover span:last-child{color:var(--accent);}
+    .links span:first-child{color:var(--quiet);}
+    .links span:last-child{direction:ltr;text-align:right;unicode-bidi:isolate;}
+
+    footer{border-top:1px solid var(--rule);}
+    .foot{max-width:var(--max);margin:0 auto;padding:1.75rem var(--gutter);display:flex;justify-content:space-between;gap:1rem;font-size:0.85rem;color:var(--quiet);flex-wrap:wrap;}
+    .foot em{font-family:var(--serif);direction:ltr;}
+
+    @media(max-width:860px){.grid{grid-template-columns:1fr;}.item{grid-template-columns:1fr;gap:0.3rem;}}
+    @media(max-width:640px){.nav-links li.hide-sm{display:none;}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;}*,*::before,*::after{transition:none !important;}}
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://cyborgt.me/ar#page",
+        "url": "https://cyborgt.me/ar",
+        "name": "اختبار اختراق وأمن تطبيقات الويب في دمشق، سوريا",
+        "inLanguage": "ar",
+        "isPartOf": { "@id": "https://cyborgt.me/#website" },
+        "about": { "@id": "https://cyborgt.me/#person" },
+        "mainEntity": { "@id": "https://cyborgt.me/#person" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://cyborgt.me/#person",
+        "name": "Michel Aljed",
+        "alternateName": ["ميشيل الجد", "ميشال الجد"],
+        "url": "https://cyborgt.me/",
+        "address": { "@type": "PostalAddress", "addressLocality": "دمشق", "addressCountry": "SY" },
+        "knowsAbout": ["اختبار الاختراق", "أمن تطبيقات الويب", "أمن الـ API", "OSINT", "الأمن السيبراني"]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="nav-in">
+      <a href="/" class="brand" lang="en">Michel Aljed</a>
+      <ul class="nav-links">
+        <li class="hide-sm"><a href="#services">الخدمات</a></li>
+        <li class="hide-sm"><a href="#work">أعمال سابقة</a></li>
+        <li class="hide-sm"><a href="#contact">تواصل</a></li>
+        <li><a href="/" class="lang" hreflang="en" lang="en">English</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <header class="hero">
+        <p class="kicker">اختبار اختراق · دمشق، سوريا</p>
+        <h1>اختبار اختراق لتطبيقات الويب والـ API، قبل أن يجد غيرك الثغرة</h1>
+        <p class="lead">أختبر أنظمة الشركات والمؤسسات في سوريا بتفويض خطي من صاحب النظام، وأسلّم تقريراً واضحاً يشرح كل ثغرة وخطورتها وطريقة إصلاحها، مكتوباً لمن سيصلحها وليس لخبراء الأمن فقط.</p>
+        <p class="who"><b class="ltr">Michel Aljed</b> · مهندس أمن هجومي ومختبر اختراق · طالب سنة أخيرة هندسة معلوماتية، اختصاص أمن سيبراني</p>
+        <div class="cta">
+          <a href="#contact" class="btn btn-solid">اطلب تقييماً</a>
+          <a href="#work" class="btn btn-line">أعمال سابقة</a>
+        </div>
+      </header>
+    </div>
+
+    <div class="wrap">
+      <section id="services">
+        <h2>الخدمات</h2>
+        <p class="intro">كل اختبار يتم بتفويض خطي مسبق، وكل ثغرة تُؤكَّد يدوياً قبل أن تدخل التقرير. لا أسلّم مخرجات أداة فحص آلي على أنها تقرير.</p>
+        <div class="grid">
+          <article class="card">
+            <h3>اختبار اختراق تطبيقات الويب والـ API</h3>
+            <p>اختبار من الخارج (Black-box) يشمل الاستطلاع، اكتشاف الثغرات، تقييم خطورتها، وتقرير معالجة رسمي بالعربية أو الإنكليزية.</p>
+            <p class="for"><b>مناسب لـ</b> الشركات التي تملك موقعاً أو بوابة أو تطبيقاً فيه بيانات عملاء.</p>
+          </article>
+          <article class="card">
+            <h3>مراجعة الانكشاف عبر المصادر المفتوحة (OSINT)</h3>
+            <p>ماذا يستطيع مهاجم أن يعرف عن مؤسستك دون أن يلمس أنظمتها: نطاقات فرعية منسية، خدمات إدارة مكشوفة، بيانات مسرّبة، وأخطاء إعداد.</p>
+            <p class="for"><b>مناسب لـ</b> المؤسسات التي تريد صورة أولى سريعة عن سطح الهجوم لديها.</p>
+          </article>
+          <article class="card">
+            <h3>أدوات أمنية مخصصة</h3>
+            <p>بناء أدوات فحص بلغة Python وC++ لحالة محددة عندكم، بنفس القاعدة: لا تُبلّغ الأداة عن نتيجة قبل أن تتحقق منها.</p>
+            <p class="for"><b>مناسب لـ</b> الفرق الأمنية التي تحتاج أتمتة فحص معيّن بدون إنذارات كاذبة.</p>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <div class="wrap">
+      <section id="process">
+        <h2>كيف يتم العمل</h2>
+        <ol class="steps">
+          <li><div><b>تحديد النطاق والتفويض</b><span>نتفق على الأنظمة المشمولة وحدود الاختبار، وتوقّعون تفويضاً خطياً قبل أي خطوة.</span></div></li>
+          <li><div><b>الاختبار</b><span>استطلاع، ثم اختبار يدوي مدعوم بالأدوات، مع تجنب أي إجراء يؤثر على عمل النظام.</span></div></li>
+          <li><div><b>التحقق</b><span>كل ثغرة تُثبت بدليل قابل للتكرار، وما لا يمكن إثباته لا يدخل التقرير.</span></div></li>
+          <li><div><b>التقرير</b><span>تقرير رسمي يرتّب الثغرات حسب الخطورة، مع خطوات إصلاح عملية، ونقاش النتائج مع فريقكم.</span></div></li>
+        </ol>
+      </section>
+    </div>
+
+    <div class="wrap">
+      <section id="work">
+        <h2>أعمال سابقة</h2>
+        <p class="intro">تقييمات مصرّح بها وإفصاحات مسؤولة. أسماء الجهات وتفاصيل الثغرات محجوبة التزاماً بالسرية.</p>
+        <div class="list">
+          <div class="item">
+            <div class="kind">بوابة جامعية</div>
+            <div>
+              <h3>اختبار اختراق كامل من الخارج</h3>
+              <p>استطلاع واكتشاف ثغرات وتقييم مخاطر وتقرير معالجة رسمي. شملت النتائج خدمات إدارة عن بُعد مكشوفة للإنترنت.</p>
+              <div class="nums"><div><b>21</b><span>ثغرة مُبلّغ عنها</span></div><div><b>8</b><span>حرجة</span></div><div><b>24</b><span>CVE مطابقة</span></div></div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="kind">بوابة قطاع عام</div>
+            <div>
+              <h3>تقييم أمني قائم على المصادر المفتوحة</h3>
+              <p>تقييم مصرّح موثّق بتقرير رسمي بالعربية مع إرشادات المعالجة.</p>
+              <div class="nums"><div><b>19</b><span>نطاقاً فرعياً</span></div><div><b>20</b><span>ثغرة</span></div><div><b>9</b><span>حرجة أو عالية</span></div></div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="kind">بوابة تجارية</div>
+            <div>
+              <h3>اختبار اختراق من الخارج</h3>
+              <p>نفس المنهجية وبنية التقرير، مطبقة على شركة تجارية.</p>
+            </div>
+          </div>
+          <div class="item">
+            <div class="kind">إفصاح دولي</div>
+            <div>
+              <h3>لوحة تحكم API Gateway مكشوفة</h3>
+              <p>اكتشاف لوحة إدارة Apache APISIX مكشوفة للإنترنت لدى شركة عالمية لتصنيع الأجهزة، والتحقق من ملكيتها عبر شهادة TLS، وإبلاغ مركز الاستجابة الأمنية لديها.</p>
+            </div>
+          </div>
+        </div>
+        <p class="note">حالياً مهندس أمن سيبراني ضمن فريق <span class="ltr">Syber X Fortress</span> في دمشق، وباحث أمني مستقل على <span class="ltr">HackerOne</span> و<span class="ltr">Intigriti</span> و<span class="ltr">Bugcrowd</span>.</p>
+      </section>
+    </div>
+
+    <div class="wrap">
+      <section id="read" class="more">
+        <h2>للقراءة</h2>
+        <ul>
+          <li><a href="/writeups/why-syria">لماذا لم تُخترق سوريا بالكامل حتى الآن؟</a> · مقال مبني على مصادر مفتوحة ومسح سلبي للبنية الرقمية السورية.</li>
+          <li><a href="/beast403" hreflang="en">Beast403</a> · دراسة حالة (بالإنكليزية) عن أداة لاكتشاف تجاوز 403/401 تتحقق من كل نتيجة قبل الإبلاغ عنها.</li>
+          <li><a href="/" hreflang="en">الصفحة الكاملة بالإنكليزية</a> · الأدوات، الأبحاث، المهارات، والشهادات.</li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="wrap">
+      <section id="contact">
+        <h2>تواصل</h2>
+        <p class="intro">احكِ لي ما الذي تريد حمايته، وسأقول لك بوضوح إن كنت الشخص المناسب له. الرد عادة خلال 48 ساعة.</p>
+        <div class="links">
+          <a href="mailto:michel.aljad@gmail.com"><span>البريد</span><span>michel.aljad@gmail.com</span></a>
+          <a href="https://www.linkedin.com/in/michel-aljed-566240334" target="_blank" rel="noopener noreferrer"><span>LinkedIn</span><span>michel-aljed</span></a>
+          <a href="/Michel_Aljed_CV.pdf" download><span>السيرة الذاتية</span><span>Michel_Aljed_CV.pdf</span></a>
+          <a href="https://instagram.com/cyborg.div" target="_blank" rel="noopener noreferrer"><span>Instagram</span><span>@cyborg.div</span></a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="foot">
+      <span class="ltr">Michel Aljed · cyborgt.me · © 2026</span>
+      <em>Verify first. Then report.</em>
+    </div>
+  </footer>
+
+</body>
+</html>

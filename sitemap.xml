@@ -1,19 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://cyborgt.me/</loc>
-    <lastmod>2026-11-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
+    <lastmod>2026-11-07</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cyborgt.me/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://cyborgt.me/ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cyborgt.me/"/>
+  </url>
+  <url>
+    <loc>https://cyborgt.me/ar</loc>
+    <lastmod>2026-11-07</lastmod>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://cyborgt.me/ar"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cyborgt.me/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cyborgt.me/"/>
+  </url>
+  <url>
+    <loc>https://cyborgt.me/beast403</loc>
+    <lastmod>2026-11-07</lastmod>
+  </url>
+  <url>
+    <loc>https://cyborgt.me/writeups/why-syria</loc>
+    <lastmod>2026-11-07</lastmod>
   </url>
   <url>
     <loc>https://cyborgt.me/Michel_Aljed_CV.pdf</loc>
     <lastmod>2026-11-02</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://cyborgt.me/llms.txt</loc>
-    <lastmod>2026-11-02</lastmod>
-    <priority>0.5</priority>
   </url>
 </urlset>

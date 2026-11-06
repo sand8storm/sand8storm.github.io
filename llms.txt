@@ -1,18 +1,33 @@
 # Michel Aljed (ميشيل الجد)
 
-> Michel Aljed is an offensive security engineer and penetration tester based in Damascus, Syria. He tests web applications for security flaws, builds security tooling in Python and C++, and does empirical research in algorithms and machine learning.
+> Michel Aljed is a penetration tester and offensive security engineer based in Damascus, Syria. He performs authorized web application and API penetration testing and OSINT exposure reviews for organizations in Syria and remotely, builds verification-first security tooling in Python and C++, and does empirical research in algorithms and machine learning.
 
 Also known as: ميشيل الجد, ميشال الجد, Michel Al-Jed. Online handles: sand8storm (GitHub), sand666wind (HackerOne, Intigriti, Bugcrowd), cyborg.div (Instagram, Arabic-language security content).
 
-## Focus
-- Web application penetration testing (black-box, authorized engagements with Syrian organizations)
-- OSINT-driven security assessments
-- Bug bounty and responsible disclosure on HackerOne, Intigriti, and Bugcrowd
-- Security tool development in Python and C++
+## Current role
+- Cybersecurity Engineer at Syber X Fortress, a cybersecurity firm in Damascus, Syria (project-based penetration testing and vulnerability management, 2026 to present)
+- Independent security researcher on HackerOne, Intigriti, and Bugcrowd (2024 to present)
+
+## Services
+- Web application and API penetration testing (black-box, under written authorization from the system owner), with a formal remediation report in Arabic or English
+- OSINT exposure reviews: what an attacker can learn about an organization without touching its systems
+- Custom security tooling that only reports results it has verified
+
+## Selected work
+- University portal, authorized black-box penetration test: 21 findings reported, 8 critical, 24 matched CVEs
+- Public-sector portal, OSINT-driven assessment: 19 subdomains mapped, 20 findings, 9 critical or high
+- Commercial portal, authorized black-box penetration test
+- Responsible disclosure to a global device manufacturer's Security Response Center: an Apache APISIX admin dashboard exposed to the internet, ownership verified via its TLS certificate
+- Client names and finding details are withheld under confidentiality.
 
 ## Tools
-- [Beast403](https://github.com/sand8storm/Beast403): released 403/401 bypass scanner, accuracy first. Validates every candidate bypass against a live per-target oracle using SimHash structural classification, with a raw-socket engine to defeat client-side path normalization. 0 false positives across 28 negative targets.
+- [Beast403](https://cyborgt.me/beast403): released 403/401 bypass scanner (`pip install beast403`). Validates every candidate bypass against a live per-target oracle using SimHash structural classification, with a raw-socket engine to defeat client-side path normalization. 100% precision, 0 false positives across 28 negative targets, 67% recall with the gap root-caused. Source: https://github.com/sand8storm/Beast403
 - SSTIeye (in progress): server-side template injection scanner using randomized arithmetic probes confirmed against a baseline response.
+- Pentest RAG assistant (in progress): a locally-run LLM (Qwen via Ollama) with a retrieval layer over pentest and bug-bounty references, to automate routine parts of reconnaissance and reporting while keeping data on-device.
+
+## Writing
+- [Why hasn't Syria been fully breached, yet?](https://cyborgt.me/writeups/why-syria) (Arabic): an opinion piece built on open-source intelligence and passive scanning of Syria's digital infrastructure, on the gap between its exposure and the few reported incidents.
+- [Beast403 case study](https://cyborgt.me/beast403): design, benchmark, and the reported recall gap.
 
 ## Research
 - TSP heuristics, a systematic empirical study of 20+ construction, local-search, and metaheuristic methods with paired t-tests.
@@ -20,13 +35,17 @@ Also known as: ميشيل الجد, ميشال الجد, Michel Al-Jed. Online h
 - Riemann zeta zeros, autoencoder-based analysis of Odlyzko's dataset.
 
 ## Background
-- B.Sc. Computer Engineering, Antioch Private Syrian University, Damascus (expected 2027)
+- B.Sc. Informatics Engineering, Cybersecurity specialization, Antioch Private Syrian University, Damascus (2022 to 2027 expected, final year)
+- Certifications: Introduction to Cybersecurity (Cisco Networking Academy, 2026), Introduction to OSINT (Security Blue Team, 2025), CompTIA PenTest+ (PT0-003) exam preparation (Packt via Coursera, 2026), Supervised Machine Learning: Regression & Classification (DeepLearning.AI & Stanford via Coursera, 2026)
 - Reached the top 10 on TryHackMe in Syria
 - Languages: Arabic (native), English (C1)
 
 ## Links
 - [Website](https://cyborgt.me/)
+- [Arabic services page](https://cyborgt.me/ar)
 - [CV (PDF)](https://cyborgt.me/Michel_Aljed_CV.pdf)
 - [GitHub](https://github.com/sand8storm)
 - [LinkedIn](https://www.linkedin.com/in/michel-aljed-566240334)
 - [HackerOne](https://hackerone.com/sand666wind)
+- [PyPI: beast403](https://pypi.org/project/beast403/)
+- Email: michel.aljad@gmail.com

@@ -3,14 +3,18 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'sha256-ojNQEX5fDwNqHPqHOCBIrO0GHFz8HUDSiz1bo1se8FU=' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'sha256-v3Ws24zbB3AWOvDn3BLIbjOVUeEcgrkcSEI6s0Pr/5E=' https://static.cloudflareinsights.com; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests"/>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'sha256-4ouiDg+nP/7LKP9PfXuGikmPeTdn+jX3TKt36kh4zIk=' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'sha256-v3Ws24zbB3AWOvDn3BLIbjOVUeEcgrkcSEI6s0Pr/5E=' https://static.cloudflareinsights.com; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests"/>
   <meta name="referrer" content="strict-origin-when-cross-origin"/>
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1"/>
   <meta name="googlebot" content="index, follow"/>
   <link rel="canonical" href="https://cyborgt.me/"/>
+  <link rel="alternate" hreflang="en" href="https://cyborgt.me/"/>
+  <link rel="alternate" hreflang="ar" href="https://cyborgt.me/ar"/>
+  <link rel="alternate" hreflang="x-default" href="https://cyborgt.me/"/>
+  <meta name="theme-color" content="#ECEEE9"/>
 
-  <title>Michel Aljed (ميشيل الجد) — Offensive Security Engineer &amp; Penetration Tester, Damascus</title>
-  <meta name="description" content="Michel Aljed (ميشيل الجد، ميشال الجد): offensive security engineer and penetration tester in Damascus, Syria. Web application penetration testing, OSINT, security tooling in Python and C++, and empirical research in algorithms and machine learning."/>
+  <title>Michel Aljed (ميشيل الجد) — Penetration Tester &amp; Offensive Security Engineer in Damascus, Syria</title>
+  <meta name="description" content="Michel Aljed (ميشيل الجد، ميشال الجد): penetration tester and offensive security engineer in Damascus, Syria. Authorized web application and API penetration testing, OSINT exposure reviews, and verification-first security tooling (Beast403)."/>
   <meta name="keywords" content="Michel Aljed, ميشيل الجد, ميشال الجد, ميشيل ألجد, Michel Al Jed, penetration tester Damascus, offensive security engineer Syria, web application penetration testing, OSINT, bug bounty, Beast403, SSTIeye, sand8storm, sand666wind"/>
   <meta name="author" content="Michel Aljed"/>
 
@@ -22,6 +26,9 @@
   <meta property="og:description" content="Web application penetration testing, OSINT, security tooling, and rigorous applied research. Damascus, Syria."/>
   <meta property="og:url" content="https://cyborgt.me/"/>
   <meta property="og:image" content="https://cyborgt.me/og-image.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:image:alt" content="Michel Aljed, penetration tester and offensive security engineer, Damascus, Syria"/>
   <meta property="og:locale" content="en_US"/>
   <meta property="og:locale:alternate" content="ar_SY"/>
   <meta name="twitter:card" content="summary_large_image"/>
@@ -72,6 +79,8 @@
     .nav-links { display: flex; gap: 1.75rem; list-style: none; }
     .nav-links a { font-size: 0.86rem; color: var(--ink-2); text-decoration: none; padding-block: 0.4rem; border-bottom: 1px solid transparent; transition: color 0.2s, border-color 0.2s; }
     .nav-links a:hover, .nav-links a.active { color: var(--accent); border-bottom-color: var(--accent); }
+    .lang { font-size: 0.86rem; color: var(--ink-2); text-decoration: none; border: 1px solid var(--rule); border-radius: 999px; padding: 0.3rem 0.8rem; margin-left: auto; transition: color 0.2s, border-color 0.2s; }
+    .lang:hover { color: var(--accent); border-color: var(--accent); }
     .menu-btn { display: none; background: none; border: 1px solid var(--rule); border-radius: 999px; padding: 0.45rem 0.9rem; font: inherit; font-size: 0.82rem; color: var(--ink-2); cursor: pointer; }
 
     /* layout */
@@ -200,6 +209,7 @@
       .nav-links.open { display: flex; }
       .nav-links a { padding: 0.7rem 0; border-bottom: none; }
       .menu-btn { display: inline-block; }
+      .nav-in { gap: 0.75rem; }
       .findings { gap: 1.5rem; }
       .foot { flex-direction: column; }
     }
@@ -226,11 +236,22 @@
         "url": "https://cyborgt.me/",
         "email": "michel@cyborgt.me",
         "jobTitle": "Offensive Security Engineer and Penetration Tester",
+        "worksFor": { "@type": "Organization", "name": "Syber X Fortress", "address": { "@type": "PostalAddress", "addressLocality": "Damascus", "addressCountry": "SY" } },
+        "hasOccupation": { "@type": "Occupation", "name": "Penetration Tester", "occupationLocation": { "@type": "Country", "name": "Syria" } },
         "description": "Offensive security engineer and penetration tester based in Damascus, Syria. Web application penetration testing, OSINT, security tooling in Python and C++, and empirical research in algorithms and machine learning.",
         "knowsLanguage": ["ar", "en"],
-        "knowsAbout": ["Penetration Testing", "Web Application Security", "OSINT", "Vulnerability Assessment", "Bug Bounty", "Security Tool Development", "Python", "C++", "Machine Learning", "Autoencoders", "Combinatorial Optimization", "Number Theory", "Experimental Design", "Statistical Testing"],
+        "knowsAbout": ["Penetration Testing", "Web Application Security", "API Security", "Offensive Security", "اختبار الاختراق", "الأمن السيبراني", "OSINT", "Vulnerability Assessment", "Bug Bounty", "Security Tool Development", "Python", "C++", "Machine Learning", "Autoencoders", "Combinatorial Optimization", "Number Theory", "Experimental Design", "Statistical Testing"],
         "alumniOf": { "@type": "CollegeOrUniversity", "name": "Antioch Private Syrian University" },
         "address": { "@type": "PostalAddress", "addressLocality": "Damascus", "addressCountry": "SY" },
+        "makesOffer": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Web application and API penetration testing", "serviceType": "Penetration testing", "areaServed": [{ "@type": "Country", "name": "Syria" }, "Worldwide (remote)"], "provider": { "@id": "https://cyborgt.me/#person" } } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "OSINT exposure review", "serviceType": "Security assessment", "areaServed": [{ "@type": "Country", "name": "Syria" }, "Worldwide (remote)"], "provider": { "@id": "https://cyborgt.me/#person" } } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Custom security tooling", "serviceType": "Security tool development", "areaServed": "Worldwide (remote)", "provider": { "@id": "https://cyborgt.me/#person" } } }
+        ],
+        "subjectOf": [
+          { "@id": "https://cyborgt.me/beast403#article" },
+          { "@id": "https://cyborgt.me/writeups/why-syria#article" }
+        ],
         "sameAs": [
           "https://github.com/sand8storm",
           "https://pypi.org/project/beast403/",
@@ -247,14 +268,14 @@
         "url": "https://cyborgt.me/",
         "name": "Michel Aljed",
         "alternateName": ["ميشيل الجد", "cyborgt.me"],
-        "inLanguage": "en",
+        "inLanguage": ["en", "ar"],
         "publisher": { "@id": "https://cyborgt.me/#person" }
       },
       {
         "@type": "ProfilePage",
         "@id": "https://cyborgt.me/#page",
         "url": "https://cyborgt.me/",
-        "name": "Michel Aljed (ميشيل الجد) — Offensive Security Engineer & Penetration Tester",
+        "name": "Michel Aljed (ميشيل الجد) — Penetration Tester & Offensive Security Engineer in Damascus, Syria",
         "isPartOf": { "@id": "https://cyborgt.me/#website" },
         "mainEntity": { "@id": "https://cyborgt.me/#person" }
       }
@@ -275,7 +296,8 @@
         <li><a href="#skills">Skills</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
-      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">Menu</button>
+      <a href="/ar" class="lang" hreflang="ar" lang="ar">العربية</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-controls="navLinks" aria-expanded="false">Menu</button>
     </div>
   </header>
 
@@ -292,7 +314,7 @@
           <div class="hero-cta">
             <a href="#contact" class="btn btn-solid">Discuss an engagement</a>
             <a href="#assessments" class="btn btn-line">See the work</a>
-            <a href="/Michel_Aljed_CV.pdf" class="btn btn-line" download="Michel_Aljed_CV.pdf">Download CV (PDF)</a>       
+            <a href="/Michel_Aljed_CV.pdf" class="btn btn-line" download="Michel_Aljed_CV.pdf">Download CV (PDF)</a>
           </div>
         </div>
         <dl class="facts">
@@ -317,7 +339,7 @@
           <div class="track">
             <h3>Web application penetration testing<small>Black-box testing and OSINT exposure reviews</small></h3>
             <div>
-              <p>Authorized testing of web applications end to end: reconnaissance, vulnerability identification, risk rating, and a remediation report written for the people who have to fix it. Every finding is confirmed before it is reported, and all testing is performed under written authorization from the system owner.</p>
+              <p>Authorized testing of web applications and APIs end to end, for organizations in Syria and remotely: reconnaissance, vulnerability identification, risk rating, and a remediation report written for the people who have to fix it. Every finding is confirmed before it is reported, and all testing is performed under written authorization from the system owner.</p>
               <p class="for"><b>Best for</b> teams that want weaknesses found, proven, and explained, not a scanner export.</p>
               <a class="go" href="#assessments">See past assessments</a>
             </div>
@@ -534,6 +556,9 @@
             <h3>B.Sc. in Informatics Engineering — Cybersecurity</h3>
             <p>Antioch Private Syrian University, Damascus. Final-year student; coursework spans software engineering, machine learning, neural networks, databases, and discrete mathematics.</p>
             <p class="yrs">2022 – 2027 (expected)</p>
+            <h3>Cybersecurity Engineer, Syber X Fortress</h3>
+            <p>Project-based penetration testing and vulnerability management with a Damascus cybersecurity firm.</p>
+            <p class="yrs">2026 – present</p>
             <h3>Independent security researcher</h3>
             <p>Vulnerability research and responsible disclosure on HackerOne, Intigriti, and Bugcrowd, alongside the authorized assessments above. Reached the top 10 on TryHackMe in Syria for a month.</p>
             <p class="yrs">2024 – present</p>
@@ -578,7 +603,7 @@
 
   <footer>
     <div class="foot">
-      <span>Michel Aljed · cyborgt.me · © 2026</span>
+      <span>Michel Aljed · cyborgt.me · © 2026 · <a href="/ar" hreflang="ar" lang="ar">العربية</a></span>
       <em>Verify first. Then report.</em>
     </div>
   </footer>
