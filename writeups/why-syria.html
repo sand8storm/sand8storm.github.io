@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="referrer" content="strict-origin-when-cross-origin"/>
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1"/>
+  <link rel="canonical" href="https://cyborgt.me/writeups/why-syria"/>
+
+  <title>لماذا لم تُخترق سوريا بالكامل حتى الآن؟ · Michel Aljed</title>
+  <meta name="description" content="دراسة قائمة على مصادر مفتوحة ومسح سلبي للبنية الرقمية السورية، وقراءة في الفجوة بين حجم الانكشاف وقلّة الحوادث المعلنة — ولماذا قد تختفي هذه الحماية مع العودة إلى النظام المصرفي الدولي."/>
+  <meta name="author" content="Michel Aljed"/>
+
+  <meta property="og:type" content="article"/>
+  <meta property="og:title" content="لماذا لم تُخترق سوريا بالكامل حتى الآن؟"/>
+  <meta property="og:description" content="قراءة في الفجوة بين انكشاف البنية الرقمية السورية وقلّة الحوادث المعلنة."/>
+  <meta property="og:url" content="https://cyborgt.me/writeups/why-syria"/>
+  <meta property="og:locale" content="ar_SY"/>
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%2335584D'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='19' font-style='italic' fill='%23EEF0EB' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E"/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&family=Newsreader:ital,opsz@1,6..72&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --paper:#ECEEE9; --paper-2:#E3E6E0; --card:#F5F6F3;
+      --ink:#23292B; --ink-2:#4E5654; --quiet:#7F8884; --rule:#CDD2CC;
+      --accent:#35584D; --accent-2:#2A4840; --accent-soft:rgba(53,88,77,0.10);
+      --ar:'IBM Plex Sans Arabic',-apple-system,'Segoe UI',Tahoma,sans-serif;
+      --max:760px; --gutter:clamp(1.25rem,4vw,3rem);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--paper);color:var(--ink);font-family:var(--ar);font-weight:400;font-size:1.05rem;line-height:1.95;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+    a{color:inherit;}
+    :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px;}
+    ::selection{background:var(--accent);color:var(--paper);}
+
+    .nav{position:sticky;top:0;z-index:50;background:rgba(236,238,233,0.84);backdrop-filter:blur(14px) saturate(120%);border-bottom:1px solid var(--rule);}
+    .nav-in{max-width:var(--max);margin:0 auto;padding:0 var(--gutter);height:64px;display:flex;align-items:center;justify-content:space-between;gap:2rem;}
+    .brand{font-family:'Newsreader',Georgia,serif;font-size:1.35rem;font-style:italic;text-decoration:none;letter-spacing:-0.01em;direction:ltr;}
+    .back{font-size:0.9rem;color:var(--ink-2);text-decoration:none;border-bottom:1px solid transparent;transition:color .2s,border-color .2s;}
+    .back:hover{color:var(--accent);border-bottom-color:var(--accent);}
+
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gutter);}
+    header.hd{padding-block:clamp(3rem,7vw,5rem) 2.25rem;border-bottom:1px solid var(--rule);}
+    .kicker{font-size:0.85rem;color:var(--accent);margin-bottom:1rem;font-weight:500;}
+    h1{font-weight:600;font-size:clamp(2rem,5.5vw,3rem);line-height:1.3;letter-spacing:-0.01em;}
+    .byline{margin-top:1.25rem;font-size:0.9rem;color:var(--quiet);}
+
+    article{padding-block:clamp(2.25rem,5vw,3rem);}
+    article p{margin-bottom:1.3rem;}
+    article h2{font-weight:600;font-size:1.5rem;margin:2.4rem 0 0.9rem;line-height:1.4;}
+    .num{color:var(--accent);font-weight:600;}
+    blockquote{margin:1.6rem 0;padding:1.1rem 1.4rem;background:var(--card);border-right:3px solid var(--accent);border-radius:10px 0 0 10px;color:var(--ink-2);font-size:1.02rem;line-height:1.9;}
+
+    .disclaimer{margin-top:2.5rem;padding-top:1.75rem;border-top:1px solid var(--rule);font-size:0.9rem;line-height:1.85;color:var(--quiet);}
+    .copy{margin-top:1.25rem;font-size:0.82rem;color:var(--quiet);direction:ltr;text-align:right;}
+
+    footer{border-top:1px solid var(--rule);margin-top:1rem;}
+    .foot{max-width:var(--max);margin:0 auto;padding:1.75rem var(--gutter);display:flex;justify-content:space-between;gap:1rem;font-size:0.82rem;color:var(--quiet);flex-wrap:wrap;direction:ltr;}
+    .foot em{font-family:'Newsreader',Georgia,serif;font-size:0.95rem;}
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"OpinionNewsArticle",
+    "headline":"لماذا لم تُخترق سوريا بالكامل حتى الآن؟",
+    "author":{"@type":"Person","name":"Michel Aljed","url":"https://cyborgt.me/"},
+    "inLanguage":"ar",
+    "url":"https://cyborgt.me/writeups/why-syria",
+    "about":["أمن المعلومات","البنية التحتية الرقمية","سوريا"]
+  }
+  </script>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="nav-in">
+      <a href="/" class="brand">Michel Aljed</a>
+      <a href="/#research" class="back">← العودة للموقع</a>
+    </div>
+  </header>
+
+  <main>
+    <header class="hd">
+      <div class="wrap">
+        <p class="kicker">مقال · بحث مبني على مصادر مفتوحة ومسح سلبي</p>
+        <h1>لماذا لم تُخترق سوريا بالكامل حتى الآن؟</h1>
+        <p class="byline">بقلم ميشيل الجد</p>
+      </div>
+    </header>
+
+    <div class="wrap">
+      <article>
+        <p>في نقاش مع زميل في المجال قلت إن أي مجموعة APT روسية أو كورية شمالية تستطيع لو أرادت أن تخترق البنية الرقمية السورية خلال ساعات. لم يكن ذلك مبالغة بقدر ما كان فرضية، فقررت اختبارها.</p>
+
+        <p>من خلال دراسة أجريتها على البنية التحتية الرقمية السورية، اعتماداً على مصادر مفتوحة ومسح سلبي، وجدت مستوى من الانكشاف يضعها برأيي بين الأضعف عالمياً: قواعد بيانات متاحة للعامة، إضافة إلى أخطاء تكوين تسرب معلومات حساسة، وآلاف الثغرات المعروفة دون ترقيع، وهذا فقط بمسح سلبي، فما خفي أعظم.</p>
+
+        <p>لكن المفارقة أن عدد الحوادث المعلنة لا يتناسب إطلاقاً مع هذا الحجم من الانكشاف، وتفسير هذه الفجوة أخطر من الثغرات نفسها.</p>
+
+        <h2><span class="num">١.</span> نعيم الجهل</h2>
+        <p>كم مؤسسة سورية تملك فريق SOC أو نظام SIEM، أو حتى سجلات تُراجع فعلاً؟ الأرجح أن ثغرات مثل IDOR تُستغل بصمت وأن البيانات تتسرب بانتظام، ببساطة لأن أحداً لا يراقب.</p>
+
+        <h2><span class="num">٢.</span> الخوارزمية الجشعة: مكسب قريب وخسارة بعيدة</h2>
+        <p>قال لي أحد أصحاب الأعمال حرفياً:</p>
+        <blockquote>"إذا صار عندي اختراق بوقف الموقع يومين وبحط الباك أب، وبأسوأ الأحوال بخسر 400 دولار، ليش لادفع 3000 دولار لفريق أمني كامل؟ والبيانات ياخدوها، شو رح يقدروا يعملوا فيها؟ ينقعوها ويشربوا ميتها."</blockquote>
+        <p>هذا المنطق يحصر كلفة الاختراق في توقف الخدمة، ويتجاهل أن قيمة البيانات المسروقة لا تظهر لحظة السرقة، بل في ما يُبنى عليها لاحقاً من احتيال وابتزاز.</p>
+
+        <h2><span class="num">٣.</span> حماية بلا حماية</h2>
+        <p>الدافع الأول لمعظم الجرائم السيبرانية المال. ومع غياب وسائل الدفع الدولية وضعف سوق البيانات المسروقة، أصبحت سوريا هدفاً منخفض العائد، فتجاوزها المهاجمون وفق حساب بسيط للكلفة والعائد. ما يحمي البنية السورية اليوم هو العزلة، وليس الأمن.</p>
+
+        <p>وهنا الخطر الحقيقي: مع العودة إلى النظام المصرفي الدولي وتوفر وسائل الدفع الإلكتروني، ستختفي هذه الحماية فجأة، بينما ستبقى الثغرات كما هي.</p>
+
+        <p>لذلك يجب أن يكون الأمن السيبراني جزءاً أساسياً من مسار التحول الرقمي لا ملحقاً به، وأن تبدأ التوعية بمدراء الشركات قبل عامة الناس. الأمن السيبراني ليس رفاهية، والحرب السيبرانية لا تقل ضرراً عن الحرب العسكرية.</p>
+
+        <p class="disclaimer">ملاحظة: ما ورد في هذا المنشور يعبّر عن رأي شخصي واستقراء مبني على البحث والدراسة، ولا يمثل موقف أي جهة أخرى. اعتمدت الدراسة حصراً على معلومات متاحة للعامة ومسح سلبي، دون أي محاولة وصول غير مصرّح به أو استغلال لأي ثغرة، ودون الاطلاع على أي بيانات أو الاحتفاظ بها. لا يقصد المنشور اتهام أو تسمية أي جهة بعينها، والغاية منه توعوية بحتة.</p>
+
+        <p class="copy">© 2026 Michel Aljed. All rights reserved. Quotation is permitted with attribution to the source.</p>
+      </article>
+    </div>
+  </main>
+
+  <footer>
+    <div class="foot">
+      <span>Michel Aljed · cyborgt.me · © 2026</span>
+      <em>Verify first. Then report.</em>
+    </div>
+  </footer>
+
+</body>
+</html>
